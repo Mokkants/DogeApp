@@ -1,32 +1,21 @@
-module.exports = function(mongoose){
+const mongoose = require ('mongoose');
+const Schema = mongoose.Schema;
 
-    var Post = new mongoose.Schema({
+let PostSchema = new Schema({
+    postedBy: {
+      type:   OwnerSchema,
+      required: true,
+    },
+    text: {
+        type: String
+    },
+    walker: {
+        type: WalkerSchema
+    },
+    time: {
+        type: Date,
+        required: true
+    }
+});
 
-        postedBy : {
-            type: String,
-            required:true,
-            trim: true
-        },
-        text : {
-            type: String,
-            required: true
-        },
-        walker : {
-            type: Boolean,
-            default: true
-        },
-        time : {
-            type : String,
-            trim : true
-        }
-
-        status : {
-            type : time,
-            trim : true
-        }
-
-    });
-
-    return mongoose.model('Post',Post);
-
-}
+module.exports = mongoose.model('Post', PostSchema);

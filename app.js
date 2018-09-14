@@ -14,7 +14,7 @@ var Schema = mongoose.Schema;
 
 //Import models
 var Dog = require('./models/dog.js')(mongoose);
-
+var post = require('.routes/product.route');
 
 //Home
 app.get("/",function(req,res){
