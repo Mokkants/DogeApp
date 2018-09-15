@@ -14,13 +14,13 @@ var Schema = mongoose.Schema;
 
 //Import models
 var Dog = require('./models/dog.js')(mongoose);
-var post = require('.routes/post.route');
+var posts = require('.routes/post.route');
 
 //Home
 app.get("/",function(req,res){
   res.send("API Root");
 });
-app.use('/birds', birds);
+app.use('/posts', posts);
 
 
 //db.on('error', console.error.bind(console, 'connection error:'));
