@@ -1,10 +1,5 @@
 const Post = require('../models/product.model');
 
-//Simple version, without validation or sanitation
-exports.test = function (req, res) {
-    res.send('Greetings from the Test controller!');
-};
-
 exports.post_create = function (req, res) {
     let post = new Post(
         {
@@ -25,6 +20,11 @@ exports.post_create = function (req, res) {
 exports.post_details = function(req, res) {
     Post.findById(req.params.id, function (err, post){
         if(err) return next(err);
+        if(post == null){
+            return res.status(404).json(
+                {"message": "Post not found"}
+            );
+        }
         res.send(post);
     })
 };
