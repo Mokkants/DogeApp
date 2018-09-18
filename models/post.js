@@ -1,7 +1,7 @@
 var mongoose = require ('mongoose');
 var Schema = mongoose.Schema;
 
-var PostSchema = new Schema({
+var postSchema = new Schema({
     postedBy: {
       type:   Schema.Types.ObjectId,
       ref: 'Owner',
@@ -11,7 +11,8 @@ var PostSchema = new Schema({
         type: String
     },
     walker: {
-        type: WalkerSchema
+        type: Schema.Types.ObjectId,
+        ref: 'Walker',
     },
     time: {
         type: Date,
@@ -19,4 +20,4 @@ var PostSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Post', PostSchema);
+module.exports = mongoose.model('Post', postSchema);
