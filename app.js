@@ -14,7 +14,7 @@ var Schema = mongoose.Schema;
 
 //Import models
 var Dog = require('./models/dog.js')(mongoose);
-
+var User = require('./models/user.js')(mongoose);
 
 //Home
 app.get("/",function(req,res){
@@ -30,3 +30,15 @@ db.once('open', function() {
 
 });
 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  var err_res = {
+      "message": err.message,
+      "error": {}
+  };
+  if (env === 'development') {
+      err_res["error"] = err;
+  }
+  res.status(err.status || 500);
+  res.json(err_res);
+});

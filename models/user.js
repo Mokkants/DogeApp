@@ -5,7 +5,7 @@ module.exports = function(mongoose){
 var userModel = new mongoose.Schema({
 
     
-    id : {
+    user_id : {
         type: Number,
         required:true,
         },
