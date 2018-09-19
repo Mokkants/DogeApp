@@ -1,6 +1,8 @@
+"use strict";
+
 module.exports = function(mongoose){
 
-    var Dog = new mongoose.Schema({
+    let Dog = new mongoose.Schema({
 
         name : {
             type: String,
