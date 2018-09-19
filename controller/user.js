@@ -37,6 +37,16 @@ app.get('/user:id', function(req,res,next){
     }
 })
 
+app.delete('/user:id', function(req, res, next){
+    var id = req.params.id;
+    user.findOneAndDelete({user_id: id}), function(err, user){
+        if(err) { return next(err); }
+        if(user == null){
+            return res.status(404).json({"message": "User not found"});
+    }
+}
+});
+
 
 
 
