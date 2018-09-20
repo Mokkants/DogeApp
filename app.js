@@ -32,7 +32,7 @@ app.set('appPath', 'client');
 
 
 //Import routes
-app.use(require('.routes/index'));
+app.use(require('./routes/index'));
 
 
 // Error handler (must be registered last)
