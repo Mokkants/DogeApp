@@ -1,23 +1,25 @@
 "use strict";
-
 const mongoose = require('mongoose');
 
 let Dog = new mongoose.Schema({
 
-    name : {
+    owner: {
+        type: Schema.Types.objectId,
+    },
+    name: {
         type: String,
-        required:true,
+        required: true,
         trim: true
     },
-    breed : {
+    breed: {
         type: String,
         required: true
     },
-    isSocial : {
+    isSocial: {
         type: Boolean,
         default: true
     },
-    shortInfo : {
+    shortInfo: {
         type : String,
         trim : true
     }
