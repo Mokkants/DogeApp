@@ -1,26 +1,42 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var _ = require("underscore");
-var mongoose = require('mongoose');
+"use strict";
 
+const 
+  express = require("express"),
+  bodyParser = require("body-parser"),
+  _ = require("underscore"),
+  mongoose = require('mongoose');
 
-var app = express();
-var port = process.env.PORT || 3000;
+let app = express();
+let port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://localhost/app', {useNewUrlParser: true});
 
-var db = mongoose.connection;
-var Schema = mongoose.Schema;
+let db = mongoose.connection;
+let Schema = mongoose.Schema;
 
-//Import models
-var Dog = require('./models/index.js')(mongoose);
+//TODO: access control from app.js
+//They are only here for people to see how to call them
+//Use both of these in the controllers when necessary
 
+//Access control
+let access = require('./access-control');
+
+console.log(access.currentUser);
+console.log(access.isActionAllowed("")); //false
+
+
+// Import routes
+app.use(require('./controllers'));
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
 //Home
 app.get("/",function(req,res){
   res.send("API Root");
 });
-
 
 //db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
