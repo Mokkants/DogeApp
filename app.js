@@ -1,13 +1,26 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var _ = require("underscore");
-var mongoose = require('mongoose');
-var morgan = require('morgan');
-var path = require('path');
+"use strict";
 
-// Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/app';
-var port = process.env.PORT || 3000;
+const 
+  express = require("express"),
+  bodyParser = require("body-parser"),
+  _ = require("underscore"),
+  mongoose = require('mongoose'),
+  morgan = require('morgan'),
+  path = require('path');
+      
+let app = express();
+let port = process.env.PORT || 3000;
+let mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/app';
+let env = app.get('env');
+
+// HTTP request logger
+app.use(morgan('dev'));
+// Parse requests of content-type 'application/json'
+app.use(bodyParser.json());
+// Serve static assets (for frontend client)
+var root = path.normalize(__dirname + '/..');
+app.use(express.static(path.join(root, 'client')));
+app.set('appPath', 'client');
 
 //Connect to MongoDB
 mongoose.connect(mongoURI, {useNewUrlParser: true}, function(err){
@@ -19,38 +32,33 @@ mongoose.connect(mongoURI, {useNewUrlParser: true}, function(err){
   console.log(`Connected to MongoDB with URI ${mongoURI}`);
 });
 
-// Create Express app
-var app = express();
-// Parse requests of content-type 'application/json'
-app.use(bodyParser.json());
-// HTTP request logger
-app.use(morgan('dev'));
-// Serve static assets (for frontend client)
-var root = path.normalize(__dirname + '/..');
-app.use(express.static(path.join(root, 'client')));
-app.set('appPath', 'client');
+let db = mongoose.connection;
 
+//TODO: remove access control from app.js
+//They are only here for people to see how to call them
+//Use both of these in the controllers when necessary
 
-//Import routes
-app.use(require('./routes/index'));
+//Access control
+let access = require('./access-control');
 
+console.log(access.currentUser);
+console.log(access.isActionAllowed("")); //false
 
-// Error handler (must be registered last)
-var env = app.get('env');
-app.use(function(err, req, res, next) {
-    console.error(err.stack);
-    var err_res = {
-        "message": err.message,
-        "error": {}
-    };
-    if (env === 'development') {
-        err_res["error"] = err;
-    }
-    res.status(err.status || 500);
-    res.json(err_res);
+// Import routes
+app.use(require('./controllers'));
+
+//Basic error handling
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
 });
 
-var server = app.listen(port, function(){
-  console.log('Listening on port ' + server.address().port);
+//Home
+app.get("/",function(req,res){
+  res.send("API Root");
 });
 
+db.once('open', function() {
+  app.listen(port);
+  console.log("Server is listening on port "+port);
+});

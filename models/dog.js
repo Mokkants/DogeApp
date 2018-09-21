@@ -1,27 +1,27 @@
-module.exports = function(mongoose){
+"use strict";
 
-    var Dog = new mongoose.Schema({
+const mongoose = require('mongoose');
 
-        name : {
-            type: String,
-            required:true,
-            trim: true
-        },
-        breed : {
-            type: String,
-            required: true
-        },
-        isSocial : {
-            type: Boolean,
-            default: true
-        },
-        shortInfo : {
-            type : String,
-            trim : true
-        }
+let Dog = new mongoose.Schema({
 
-    });
+    name : {
+        type: String,
+        required:true,
+        trim: true
+    },
+    breed : {
+        type: String,
+        required: true
+    },
+    isSocial : {
+        type: Boolean,
+        default: true
+    },
+    shortInfo : {
+        type : String,
+        trim : true
+    }
 
-    return mongoose.model('Dog',Dog);
+});
 
-}
+module.exports = mongoose.model('Dog',Dog);
