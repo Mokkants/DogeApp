@@ -2,55 +2,31 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var _ = require("underscore");
 var mongoose = require('mongoose');
-var morgan = require('morgan');
-var path = require('path');
 
-// Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/app';
+
+var app = express();
 var port = process.env.PORT || 3000;
 
-//Connect to MongoDB
-mongoose.connect(mongoURI, {useNewUrlParser: true}, function(err){
-  if (err){
-    console.error(`Failed to connect to MongoDB with URI ${mongoURI}`);
-    console.error(err.stack);
-    process.exit(1);
-  }
-  console.log(`Connected to MongoDB with URI ${mongoURI}`);
+mongoose.connect('mongodb://localhost/app', {useNewUrlParser: true});
+
+var db = mongoose.connection;
+var Schema = mongoose.Schema;
+
+//Import models
+var Dog = require('./models/dog.js')(mongoose);
+
+
+//Home
+app.get("/",function(req,res){
+  res.send("API Root");
 });
 
-// Create Express app
-var app = express();
-// Parse requests of content-type 'application/json'
-app.use(bodyParser.json());
-// HTTP request logger
-app.use(morgan('dev'));
-// Serve static assets (for frontend client)
-var root = path.normalize(__dirname + '/..');
-app.use(express.static(path.join(root, 'client')));
-app.set('appPath', 'client');
 
+//db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
 
-//Import routes
-app.use(require('./routes/index'));
+  app.listen(port);
+  console.log("Server is listening on port "+port);
 
-
-// Error handler (must be registered last)
-var env = app.get('env');
-app.use(function(err, req, res, next) {
-    console.error(err.stack);
-    var err_res = {
-        "message": err.message,
-        "error": {}
-    };
-    if (env === 'development') {
-        err_res["error"] = err;
-    }
-    res.status(err.status || 500);
-    res.json(err_res);
-});
-
-var server = app.listen(port, function(){
-  console.log('Listening on port ' + server.address().port);
 });
 

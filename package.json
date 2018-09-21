@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "config": {
-    "database_url": "mongodb://localhost/test"
-  },
+  "config" : { "database_url" : "mongodb://localhost/test" },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
