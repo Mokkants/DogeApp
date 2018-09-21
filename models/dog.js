@@ -34,6 +34,6 @@ var dogModel = new mongoose.Schema({
 
 });
 
-return mongoose.model('Dog', dogModel);
+return mongoose.model('dog', dogModel);
 
 }
