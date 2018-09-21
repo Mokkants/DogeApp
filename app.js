@@ -19,16 +19,21 @@ let Schema = mongoose.Schema;
 //Use both of these in the controllers when necessary
 
 //Import models
-let Dog = require('./models/dog.js')(mongoose);
 
 //Access control
 let access = require('./access-control');
-let roles = access.roles;
-access.isActionAllowed(roles.owner,"action");
+
+console.log(access.currentUser);
+console.log(access.isActionAllowed("")); //false
 
 
+// Import routes
+app.use(require('./controllers'));
 
-
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
 //Home
 app.get("/",function(req,res){

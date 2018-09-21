@@ -9,6 +9,9 @@ module.exports = function(){
         },
         walker : {
             can: []
+        },
+        default : {
+            can: []
         }
 
     }

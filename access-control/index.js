@@ -1,14 +1,13 @@
 "use strict";
 
-let roles = require("./roles");
-
 module.exports = function(){
 
-    function isActionAllowed(role,action){
-       
-        return role.can.includes(action);
+    let roles = require("./roles");
+    let isActionAllowed = (action) => currentUser.role.can.includes(action);
+   
+    let currentUser = {
+        role : roles.default
+    };
 
-    }
-
-    return {roles,isActionAllowed};
+    return {roles,isActionAllowed,currentUser};
 }();
