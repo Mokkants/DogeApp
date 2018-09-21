@@ -2,13 +2,22 @@
 module.exports = function(mongoose){
 
 
-var userModel = new mongoose.Schema({
+let userModel = new mongoose.Schema({
 
     
     user_id : {
         type: Number,
         required:true,
         },
+
+    username : {
+        type : String,
+        required : true
+    },
+    password :{ 
+        type : String,
+        required: true
+    },
     name : {
         type: String,
         required:true,
@@ -37,7 +46,6 @@ var userModel = new mongoose.Schema({
     }
    },
     
- 
     isDogOwner: {
         type: Boolean,
         required:true,
