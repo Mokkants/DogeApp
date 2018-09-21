@@ -5,8 +5,8 @@ let Schema = mongoose.Schema;
 
 let postSchema = new Schema({
     postedBy: {
-      type:   Schema.Types.ObjectId,
-      ref: 'Owner',
+      type:   String,
+      //ref: 'Owner',
       required: true
     },
     text: {

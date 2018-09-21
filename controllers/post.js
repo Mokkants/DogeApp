@@ -14,13 +14,13 @@ router.put('/:id', updatePost);
 router.delete('/:id', deletePost);
 module.exports = router;
 
-createPost = function (req, res) {
+function createPost(req, res, next) {
     let post = new Post(
         {
             postedBy: req.body.postedBy,
             text: req.body.text,
             walker: req.body.walker,
-            time: req.body.time
+            time: Date.now()
         }
     );
     post.save(function (err) {
@@ -29,9 +29,9 @@ createPost = function (req, res) {
         }
         res.send('Product Created successfully')
     })
-};
+}
 
-getPost = function(req, res) {
+function getPost(req, res, next) {
     Post.findById(req.params.id, function (err, post){
         if(err) return next(err);
         if(post == null){
@@ -41,16 +41,16 @@ getPost = function(req, res) {
         }
         res.send(post);
     })
-};
+}
 
-getAllPosts = function(req, res, next){
+function getAllPosts(req, res, next){
     Post.find(function(err, posts){
         if(err) {return next(err);}
         res.json({"data": posts});
     });
-};
+}
 
-deletePost = function(req, res, next){
+function deletePost(req, res, next){
     Post.findOneAndDelete({_id: req.params.id}, function(err, post){
         if (err) {return next(err);}
         if (post == null){
@@ -61,7 +61,7 @@ deletePost = function(req, res, next){
     });
 };
 
-updatePost = function(req, res, next) {
+function updatePost(req, res, next) {
     Post.findById(id, function(err, post){
         if (err) {return next(err);}
         if (post == null) {
