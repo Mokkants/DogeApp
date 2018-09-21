@@ -9,7 +9,7 @@ router.post('/user', function(req, res, next){
         name: req.body.name,
         city: req.body.city,
         location: req.body.location,
-        isDogOwner: req.body.isDogOwner,
+        isDogOwner: req.body.isDogOwner
     };
     router.save(function(err){
         if(err){ return next(err);}

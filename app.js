@@ -13,8 +13,8 @@ var db = mongoose.connection;
 var Schema = mongoose.Schema;
 
 //Import models
-var Dog = require('./models/dog.js')(mongoose);
-var User = require('./models/user.js')(mongoose);
+var Dog = require('./models/index.js')(mongoose);
+
 
 //Home
 app.get("/",function(req,res){
