@@ -1,21 +1,14 @@
 "use strict";
 
-const
-express = require('express');
+const 
+express = require('express'),
 router = express.Router();
-
+ 
 let models = require('../models');
 let Dog = models.Dog;
 
-router.get('/', postDog);
-router.get('/', getAllDog);
-router.get('/:user_id', getDog);
-router.get('/:user_id', deleteDog);
-module.exports = router;
-
-founction postDog(req, res, next) { //here is syntex error but i can't find the reason
-    let dog = new Dog ({
-        id: req.body.dog_id,
+router.post('/dog', function(req, res){
+    let dog = new Dog({
         //"owner_id": 
         name: req.body.name,
         breed: req.body.breed,
@@ -28,20 +21,20 @@ founction postDog(req, res, next) { //here is syntex error but i can't find the 
         }
         res.send('Dog Info Created successfully')
     })
-}
+})
 
-function getAllDog(req, res, next) {
-    Dog.find(function(err, dogs){
+router.get('/dog', function(req, res, next){
+    Dog.find(function(err, dog){
         if(err){
             return next(err);
         }
         res.json({
-            "data": dogs
+            "data": dog
         });
     })
-}
+})
 
-function getDog(req, res, next){
+router.get('/dog:owner', function(req, res, next){
     Dog.findByOwner(req.params.user_id, function(err, dog){
         if(err) return next(err);
         if(dog == null){
@@ -51,10 +44,9 @@ function getDog(req, res, next){
         }
         res.json(dog);
     })
-}
+})
 
-function deleteDog(req, res, next){
-    //dog needs ID to specify the exact entity which has to be deleted
+router.delete('/dog:dog_id', function(req, res, next){
     Dog.findOneAndDelete({id: req.params.dog_id}, function(err, dog){
         if(err) {
             return next(err);
@@ -62,5 +54,7 @@ function deleteDog(req, res, next){
         if(dog == null){
             return res.status(404).json({"Message": "Dog not found"});
         }
-    });
-}
+    })
+})
+
+module.exports = router;
