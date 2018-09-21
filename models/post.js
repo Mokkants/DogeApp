@@ -1,7 +1,9 @@
-var mongoose = require ('mongoose');
-var Schema = mongoose.Schema;
+const 
+mongoose = require ('mongoose');
 
-var postSchema = new Schema({
+let Schema = mongoose.Schema;
+
+let postSchema = new Schema({
     postedBy: {
       type:   Schema.Types.ObjectId,
       ref: 'Owner',

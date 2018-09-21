@@ -1,6 +1,20 @@
-const Post = require('../models/product.model');
+"use strict";
 
-exports.post_create = function (req, res) {
+const 
+express = require('express'),
+router = express.Router();
+
+let models = require('../models');
+let Post = models.Post;
+
+router.get('/:id', getPost);
+router.get('/', getAllPosts);
+router.post('/', createPost);
+router.put('/:id', updatePost);
+router.delete('/:id', deletePost);
+module.exports = router;
+
+createPost = function (req, res) {
     let post = new Post(
         {
             postedBy: req.body.postedBy,
@@ -17,7 +31,7 @@ exports.post_create = function (req, res) {
     })
 };
 
-exports.post_details = function(req, res) {
+getPost = function(req, res) {
     Post.findById(req.params.id, function (err, post){
         if(err) return next(err);
         if(post == null){
@@ -29,14 +43,14 @@ exports.post_details = function(req, res) {
     })
 };
 
-exports.post_all_details = function(req, res, next){
+getAllPosts = function(req, res, next){
     Post.find(function(err, posts){
         if(err) {return next(err);}
         res.json({"data": posts});
     });
 };
 
-exports.post_delete = function(req, res, next){
+deletePost = function(req, res, next){
     Post.findOneAndDelete({_id: req.params.id}, function(err, post){
         if (err) {return next(err);}
         if (post == null){
@@ -47,7 +61,7 @@ exports.post_delete = function(req, res, next){
     });
 };
 
-exports.post_add = function(req, res, next) {
+updatePost = function(req, res, next) {
     Post.findById(id, function(err, post){
         if (err) {return next(err);}
         if (post == null) {

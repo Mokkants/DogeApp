@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 let Dog = new mongoose.Schema({
 
     owner: {
-        type: Schema.Types.objectId,
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
     name: {
         type: String,

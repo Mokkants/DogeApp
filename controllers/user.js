@@ -1,8 +1,11 @@
-let express = require('express');
-let router = express.Router();
-let user = require('../models/user');
+"use strict";
 
+const 
+express = require('express'),
+router = express.Router();
 
+let models = require('../models');
+let User = models.User;
 
 router.post('/user', function(req, res, next){
     let new_user = {
@@ -18,15 +21,16 @@ router.post('/user', function(req, res, next){
 
     });
 });
+
 router.get('/user', function(req,res, next){
-    user.find(function(err, user){
+    User.find(function(err, user){
         if(err){return next(err);}
         res.json({"data": user});
     });
 });
 
 router.get('/user:id', function(req,res,next){
-    user.findById(req.params.id), function(err, user){
+    User.findById(req.params.id), function(err, user){
         if(err) return next(err);
         if(user == null){
             return res.status(404).json(
@@ -38,26 +42,24 @@ router.get('/user:id', function(req,res,next){
 
 router.put('/user:id', function(req, res, next){
     let id = req.params.id;
-    user.findById({id, function(err, user){
+    User.findById({id, function(err, user){
         if(err){ return next(err);}
         if (user == null){
             return res.status(404).json({"message": "User not found"});
 
         }
     }
+})
 });
-
 
 router.delete('/user:id', function(req, res, next){
     let id = req.params.id;
-    user.findOneAndDelete({user_id: id}), function(err, user){
+    User.findOneAndDelete({user_id: id}), function(err, user){
         if(err) { return next(err); }
         if(user == null){
             return res.status(404).json({"message": "User not found"});
     }
 }
-});
-
 });
 
 module.exports = router;
