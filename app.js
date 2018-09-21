@@ -14,11 +14,9 @@ mongoose.connect('mongodb://localhost/app', {useNewUrlParser: true});
 let db = mongoose.connection;
 let Schema = mongoose.Schema;
 
-//TODO: remove models and access control from app.js
+//TODO: access control from app.js
 //They are only here for people to see how to call them
 //Use both of these in the controllers when necessary
-
-//Import models
 
 //Access control
 let access = require('./access-control');
@@ -48,3 +46,15 @@ db.once('open', function() {
 
 });
 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  var err_res = {
+      "message": err.message,
+      "error": {}
+  };
+  if (env === 'development') {
+      err_res["error"] = err;
+  }
+  res.status(err.status || 500);
+  res.json(err_res);
+});
