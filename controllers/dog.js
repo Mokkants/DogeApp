@@ -17,6 +17,7 @@ module.exports = router;
 function createDog(req, res, next) {
     let dog = new Dog(
         {
+            owner: req.body.owner,
             name: req.body.name,
             breed: req.body.breed,
             isSocial: req.body.isSocial,
