@@ -5,8 +5,8 @@ let Schema = mongoose.Schema;
 
 let postSchema = new Schema({
     postedBy: {
-      type:   String,
-      //ref: 'Owner',
+      type:   Schema.Types.ObjectId,
+      ref: 'Owner',
       required: true
     },
     text: {
@@ -17,8 +17,17 @@ let postSchema = new Schema({
         ref: 'Walker',
     },
     time: {
-        type: Date,
-        required: true
+        created : {
+            type:Date,
+            required: true
+        },
+        lastModified : {
+            type: Date,
+        },
+        walkOrder : {
+            type: Date,
+            required: true
+        }
     }
 });
 
