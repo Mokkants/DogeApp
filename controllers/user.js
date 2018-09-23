@@ -61,7 +61,7 @@ function deleteUser(req, res, next){
         }
         res.json(user);
     });
-};
+}
 
 function updateUser(req, res, next) {
     User.findById(id, function(err, user){
