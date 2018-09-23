@@ -50,7 +50,7 @@ function getDog(req, res, next) {
                 {"message": "Dog not found"}
             );
         }
-        res.send(user);
+        res.send(dog);
     })
 }
 
