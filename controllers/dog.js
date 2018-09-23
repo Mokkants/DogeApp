@@ -67,7 +67,7 @@ function deleteDog(req, res, next){
         }
         res.json(dog);
     });
-};
+}
 
 function updateDog(req, res, next) {
     Dog.findById(id, function(err, dog){
