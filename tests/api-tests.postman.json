@@ -196,13 +196,13 @@
 							"raw": "{\n\t\"name\" : \"Ben\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/user/35",
+							"raw": "{{apiUrl}}/user/{{user_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"user",
-								"35"
+								"{{user_id}}"
 							]
 						}
 					},
