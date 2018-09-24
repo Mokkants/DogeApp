@@ -1,0 +1,539 @@
+{
+	"info": {
+		"_postman_id": "d9377ece-dd73-3f6b-7796-efb7cfa0bd41",
+		"name": "DogeApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence109\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user/38",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user",
+								"38"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"bence109\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/login/authenticate",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"login",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user/:id",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "39"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchUser",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Ben\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/user/35",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"user",
+								"35"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dog",
+			"item": [
+				{
+					"name": "CreateDog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Melia\",\n\t\"breed\": \"GSD\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/dog/",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"dog",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchDog",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"breed\": \"GSD\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/dog/:id",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"dog",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateDog",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/dog/:id",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"dog",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/dog/:id",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"dog",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllDogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{apiUrl}}/dog",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"dog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{apiUrl}}/dog",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"dog"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "CreatePost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/post/",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"post",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePost",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/post/3",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"post",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchPost",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/post/4",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"post",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePost",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n   \"text\": \"new text\",\n   \"time\" : {\n    \t\"walkOrder\" : \"2018-09-27T10:37:27.207Z\"\n    }\n   \n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/post/2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"post",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPost",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/post/3",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"post",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllPosts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/post",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
