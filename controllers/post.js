@@ -44,7 +44,7 @@ function createPost(req, res, next) {
 }
 
 function getPost(req, res, next) {
-    if(access.isActionAllowed("create_post")){
+    if(access.isActionAllowed("view_post")){
     Post.findById(req.params.id, function (err, post){
         if(err) return next(err);
         if(!post){
@@ -68,10 +68,15 @@ function deletePost(req, res, next){
     Post.findOne({_id: req.params.id}, function(err, post){
         if (err) {return next(err);}
         if (post == null){return res.status(404).json({"message": "Post not found"});}
+
+        console.log(access.isActionAllowed("delete_post"));
+         console.log(post.postedBy);
+         console.log(access.currentUser.id);
+
         if (access.isActionAllowed("delete_any_post") || 
         (access.isActionAllowed("delete_post") && post.postedBy == access.currentUser.id)){
             post.remove();
-            res.status(204);
+            res.status(204).json({"message":"Post removed successfully"});
         }else{
             res.status(401).json({"message":"Unauthorised."});
         }
