@@ -2,7 +2,8 @@
 
 const 
 express = require('express'),
-router = express.Router();
+router = express.Router(),
+access = require('../access-control');
 
 let models = require('../models');
 let Dog = models.Dog;
@@ -15,72 +16,64 @@ router.delete('/:id', deleteDog);
 module.exports = router;
 
 function createDog(req, res, next) {
-    let dog = new Dog(
-        {
-            owner: req.body.owner,
-            name: req.body.name,
-            breed: req.body.breed,
-            isSocial: req.body.isSocial,
-            shortInfo: req.body.shortInfo
-        }
-    );
-    dog.save(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.send('Dog Info created successfully')
-    })
+    console.log(access.currentUser.actions);
+    if(access.isActionAllowed('create_dog')){
+        let dog = new Dog({
+                owner: access.currentUser.id,
+                name: req.body.name,
+                breed: req.body.breed,
+                isSocial: req.body.isSocial,
+                shortInfo: req.body.shortInfo
+        }).save(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.status(201).json({'message':'Dog created successfully'});
+        });
+        
+    } else{
+        res.status(401).json({"message":"Unauthorised"});
+    }
 }
 function getAllDogs(req, res, next){
     Dog.find(function(err, dog){
-        if(err){
-            return next(err);
-        }
-        res.json({
-            "data": dog
-        });
+        if(err){return next(err);}
+        res.status(200).json({"data": dog});
     });
 }
 
 function getDog(req, res, next) {
     Dog.findById(req.params.id, function (err, dog){
         if(err) return next(err);
-        if(dog == null){
-            return res.status(404).json(
-                {"message": "Dog not found"}
-            );
-        }
-        res.send(dog);
+        if(!dog){return res.status(404).json({"message": "Dog not found"});}
+        res.status(200).json(dog);
     })
 }
 
-
-
 function deleteDog(req, res, next){
-    Dog.findOneAndDelete({_id: req.params.id}, function(err, dog){
-        if (err) {
-            return next(err);
+    Dog.findOne({_id: req.params.id}, function(err, dog){
+        if (err) {return next(err); }
+        if (!dog){return res.status(404).json({"message": "Dog not found"});}
+        if(access.isActionAllowed('delete_dog' && dog.owner.id == currentUser.id)){
+        dog.remove();
+        res.status(204);
         }
-        if (dog == null){
-            return res.status(404).json(
-                {"message": "Dog not found"});
-        }
-        res.json(dog);
     });
 }
 
 function updateDog(req, res, next) {
     Dog.findById(id, function(err, dog){
         if (err) {return next(err);}
-        if (dog == null) {
-            return res.status(404).json({"message": "Dog not found."});
-        }
+        if (dog == null) { res.status(404).json({"message": "Dog not found."});}
+        if(access.isActionAllowed('create_dog') && dog.owner.id == access.currentUser.id){
         dog.name = req.body.name;
         dog.breed = req.body.breed;
         dog.isSocial = req.body.isSocial;
         dog.shortInfo = req.body.shortInfo;
-       
         dog.save();
-        res.json(dog);
+        res.status(200).json(dog);
+        } else{
+            res.status(401).json({"message": "Unauthorised."});
+        }
     });
 }

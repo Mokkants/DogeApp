@@ -4,14 +4,14 @@ module.exports = function(){
 
     let roles = {
 
-        owner : {
-            can: []
+        'OWNER' : {
+            actions: ["create_dog"]
         },
-        walker : {
-            can: []
+        'WALKER' : {
+            actions: []
         },
-        default : {
-            can: []
+        'ADMIN' : {
+            actions: ["update_any_user","delete_any_user"]
         }
 
     }

@@ -1,10 +1,13 @@
 "use strict";
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+autoIncrement = require('mongoose-plugin-autoinc').autoIncrement;
 
 let Dog = new mongoose.Schema({
 
     owner: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+        type: mongoose.Schema.Types.Number,
+        ref: 'User',
+        required: true
     },
     name: {
         type: String,
@@ -25,5 +28,7 @@ let Dog = new mongoose.Schema({
     }
 
 });
+
+Dog.plugin(autoIncrement, { model: 'Dog', startAt: 1});
 
 module.exports = mongoose.model('Dog',Dog);

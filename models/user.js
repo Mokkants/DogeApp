@@ -1,5 +1,6 @@
 "use strict";
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+autoIncrement = require('mongoose-plugin-autoinc').autoIncrement;
 
 let User = new mongoose.Schema({
 
@@ -24,20 +25,19 @@ let User = new mongoose.Schema({
         coordinates: {
             latitude: {
                 type: Number,
-                required: false
             },
             longitude: {
                 type: Number,
-                required: false
             }
         }
     },
-    
-    isWalker: {
-        type: Boolean,
-        required:true,
+    role: {
+        type: String,
+        enum : ['OWNER','WALKER','ADMIN'],
+        default : 'OWNER'
     }
-
 });
+
+User.plugin(autoIncrement, { model: 'User', startAt: 1});
 
 module.exports = mongoose.model('User', User);
