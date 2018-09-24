@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "config" : { "database_url" : "mongodb://localhost/test" },
+  "config": {
+    "database_url": "mongodb://localhost/test"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
@@ -14,6 +16,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongoose": "^5.2.14",
+    "mongoose-plugin-autoinc": "^1.1.9",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "underline": "^1.0.4"

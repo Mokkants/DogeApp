@@ -7,6 +7,8 @@ router = express.Router();
 let models = require('../models');
 let Post = models.Post;
 
+let access = require('../access-control');
+
 router.get('/:id', getPost);
 router.get('/', getAllPosts);
 router.post('/', createPost);
@@ -15,32 +17,42 @@ router.delete('/:id', deletePost);
 module.exports = router;
 
 function createPost(req, res, next) {
-    let post = new Post(
-        {
-            postedBy: req.body.postedBy,
-            text: req.body.text,
-            walker: req.body.walker,
-            time: Date.now()
-        }
-    );
-    post.save(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.send('Product Created successfully')
-    })
+    if(access.isActionAllowed("create_post")){
+        let post = new Post(
+            {
+                postedBy: access.currentUser.id,
+                text: req.body.text,
+                walker: req.body.walker,
+                time: {
+                   created : Date.now(),
+                   lastModified : Date.now(),
+                   walkOrder : req.body.time.walkOrder
+                }
+            }
+        );
+        post.save(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.status(201).json({'message':'Post Created successfully'});
+        });
+    }else{
+        res.status(401).json({'message':'Unauthorized'});
+    }
 }
 
 function getPost(req, res, next) {
+    if(access.isActionAllowed("create_post")){
     Post.findById(req.params.id, function (err, post){
         if(err) return next(err);
-        if(post == null){
-            return res.status(404).json(
-                {"message": "Post not found"}
-            );
+        if(!post){
+            res.status(404).json({"message": "Post not found"});
         }
-        res.send(post);
-    })
+        res.status(200).json(post);
+    });
+    } else{
+        res.status(401).json({'message':'Unauthorized'});
+    }
 }
 
 function getAllPosts(req, res, next){
@@ -51,13 +63,16 @@ function getAllPosts(req, res, next){
 }
 
 function deletePost(req, res, next){
-    Post.findOneAndDelete({_id: req.params.id}, function(err, post){
+    Post.findOne({_id: req.params.id}, function(err, post){
         if (err) {return next(err);}
-        if (post == null){
-            return res.status(404).json(
-                {"message": "Camel not found"});
+        if (post == null){return res.status(404).json({"message": "Post not found"});}
+        if (access.isActionAllowed("delete_any_post") || 
+        (access.isActionAllowed("delete_post") && post.postedBy == access.currentUser.id)){
+            post.remove();
+            res.status(204);
+        }else{
+            res.status(401).json({"message":"Unauthorised."});
         }
-        res.json(camel);
     });
 };
 
@@ -67,10 +82,16 @@ function updatePost(req, res, next) {
         if (post == null) {
             return res.status(404).json({"message": "Post not found."});
         }
-        post.text = req.body.text;
-        post.time = req.body.time;
-        post.save();
-        res.json(post);
+        if (access.isActionAllowed("update_any_post") || 
+        (access.isActionAllowed("update_post") && post.postedBy == access.currentUser.id)){
+            post.text = req.body.text;
+            post.time.walkOrder = req.body.walkOrder;
+            post.time.lastModified = Date.now();
+            post.save();
+            res.json(post);
+        }else{
+            res.status(401).json({'message':'Unauthorized'});
+        }
     });
 }
 

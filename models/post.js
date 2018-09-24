@@ -1,11 +1,12 @@
 const 
-mongoose = require ('mongoose');
+mongoose = require ('mongoose'),
+autoIncrement = require('mongoose-plugin-autoinc').autoIncrement;
 
 let Schema = mongoose.Schema;
 
-let postSchema = new Schema({
+let Post = new Schema({
     postedBy: {
-      type:   Schema.Types.ObjectId,
+      type:   Schema.Types.Number,
       ref: 'Owner',
       required: true
     },
@@ -13,7 +14,7 @@ let postSchema = new Schema({
         type: String
     },
     walker: {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.Number,
         ref: 'Walker',
     },
     time: {
@@ -31,4 +32,6 @@ let postSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Post', postSchema);
+Post.plugin(autoIncrement, { model: 'Post', startAt: 1});
+
+module.exports = mongoose.model('Post', Post);
