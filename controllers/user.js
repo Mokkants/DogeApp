@@ -3,10 +3,13 @@
 
 const 
 express = require('express'),
-router = express.Router();
+router = express.Router(),
+_ = require('underscore');
 
 let models = require('../models');
 let User = models.User;
+let Dog = models.Dog;
+let Post = models.Post;
 let access = require('../access-control');
 
 
@@ -14,21 +17,20 @@ router.post('/', createUser);
 router.get('/', getAllUsers);
 router.get('/:id', getUser);
 router.put('/:id', updateUser);
+router.patch('/:id', patchUser);
 router.delete('/:id', deleteUser);
 module.exports = router;
 
 function createUser(req, res, next) {
     User.findOne({username:req.body.username}).exec(function(err, user){
         if(!user){
-            //double equals because it's string to boolean comparison
-            let role = req.body.isWalker == true ? 'WALKER' : 'OWNER';
-            console.log(req.body.isWalker);
+            let role = req.body.isWalker === "true" ?  'WALKER' : 'OWNER';
             let newUser = new User(
                 {
                     username: req.body.username,
                     name: req.body.name,
                     location: req.body.location,
-                    role: role 
+                    role: role
                 }
             );
             newUser.save(function (err) {
@@ -72,6 +74,16 @@ function deleteUser(req, res, next){
                 return res.status(404).json(
                     {"message": "User not found"});
             }
+            Dog.find({owner : user.id}).exec(function(err,dog){
+                dog.forEach(function(d){
+                    d.remove();
+                });
+            });
+            Post.find({postedBy : user.id}).exec(function(err,post){
+                post.forEach(function(p){
+                    p.remove();
+                });
+            });
             res.status(204).json({"message": "User deleted."});
         });
     }else{
@@ -88,16 +100,34 @@ function updateUser(req, res, next) {
             }
             user.username = req.body.username,
             user.name = req.body.name;
-            user.location = req.body.location;
-            user.isWalker = req.body.isWalker;
+            user.location = _.clone(req.body.location);
            
             user.save();
-            res.json(user);
+            res.status(200).json(user);
         });
     }else{
         res.status(401).json({"message":"Unauthoirzed"});
     }
     
+}
+
+function patchUser(req,res,next) {
+    User.findById(req.params.id, function(err, user){
+        if (access.isActionAllowed("modify_any_user") ||
+        (access.isActionAllowed("modify_user") && user.id==access.currentUser.id)){
+            let body = _.omit(req.body,"isWalker");
+            let obj = {};
+            Object.keys(body).forEach(function(key) {
+                if(body[key] != null && user.toObject().hasOwnProperty(key)){
+                    obj[key] = body[key];
+                } 
+            });
+            Object.assign(user, obj).save();
+            res.status(200).json(user);
+        } else{
+            res.status(401).json({'message':'Unauthorized'});
+        }
+    });
 }
 
 
