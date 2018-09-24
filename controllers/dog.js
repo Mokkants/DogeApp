@@ -56,9 +56,11 @@ function deleteDog(req, res, next){
     Dog.findOne({_id: req.params.id}, function(err, dog){
         if (err) {return next(err); }
         if (!dog){return res.status(404).json({"message": "Dog not found"});}
-        if(access.isActionAllowed('delete_dog' && dog.owner.id == access.currentUser.id)){
-        dog.remove();
-        res.status(204);
+        if(access.isActionAllowed('delete_dog') && dog.owner == access.currentUser.id){
+            dog.remove();
+            res.status(204).json({"message":"Dog was deleted successfully."});
+        }else{
+            res.status(401).json({"message":"Unauthorised"});
         }
     });
 }

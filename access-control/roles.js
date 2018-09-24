@@ -5,7 +5,7 @@ module.exports = function(){
     let roles = {
 
         'OWNER' : {
-            actions: ["create_dog","modify_post","create_post","modify_user","modify_dog"]
+            actions: ["create_dog","modify_post","create_post","modify_user","modify_dog","delete_dog"]
         },
         'WALKER' : {
             actions: []
