@@ -10,6 +10,19 @@
 			"item": [
 				{
 					"name": "CreateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b00b1921-9d37-4b19-895f-9eb7213ec9f1",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"user_id\", jsonData._id);"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -20,7 +33,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\" : \"bence109\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+							"raw": "{\n\t\"username\" : \"bence110\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/user",
@@ -49,13 +62,13 @@
 							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/user/38",
+							"raw": "{{apiUrl}}/user/{{user_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"user",
-								"38"
+								"{{user_id}}"
 							]
 						}
 					},
@@ -102,12 +115,13 @@
 							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/user",
+							"raw": "{{apiUrl}}/user/{{user_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
-								"user"
+								"user",
+								"{{user_id}}"
 							]
 						}
 					},
@@ -125,7 +139,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\":\"bence109\"\n}"
+							"raw": "{\n\t\"username\":\"bence110\"\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/login/authenticate",
@@ -155,19 +169,13 @@
 							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/user/:id",
+							"raw": "{{apiUrl}}/user/{{user_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"user",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "39"
-								}
+								"{{user_id}}"
 							]
 						}
 					},
@@ -207,6 +215,19 @@
 			"item": [
 				{
 					"name": "CreateDog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e59ad11-e726-4e0e-9f29-22b0f333cbbf",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"dog_id\", jsonData._id);"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -280,18 +301,18 @@
 							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/dog/:id",
+							"raw": "{{apiUrl}}/dog/:{{dog_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"dog",
-								":id"
+								":{{dog_id}}"
 							],
 							"variable": [
 								{
-									"key": "id",
-									"value": "8"
+									"key": "",
+									"value": ""
 								}
 							]
 						}
@@ -313,18 +334,18 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{apiUrl}}/dog/:id",
+							"raw": "{{apiUrl}}/dog/:{{dog_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"dog",
-								":id"
+								":{{dog_id}}"
 							],
 							"variable": [
 								{
-									"key": "id",
-									"value": "7"
+									"key": "",
+									"value": ""
 								}
 							]
 						}
@@ -356,12 +377,13 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{apiUrl}}/dog",
+							"raw": "{{apiUrl}}/dog/{{dog_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
-								"dog"
+								"dog",
+								"{{dog_id}}"
 							]
 						}
 					},
@@ -414,13 +436,13 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/3",
+							"raw": "{{apiUrl}}/post/{{post_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"post",
-								"3"
+								"{{post_id}}"
 							]
 						}
 					},
@@ -441,13 +463,13 @@
 							"raw": "{\n\t\"text\":\"bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/4",
+							"raw": "{{apiUrl}}/post/{{post_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"post",
-								"4"
+								"{{post_id}}"
 							]
 						}
 					},
@@ -468,13 +490,13 @@
 							"raw": "{\n\n   \"text\": \"new text\",\n   \"time\" : {\n    \t\"walkOrder\" : \"2018-09-27T10:37:27.207Z\"\n    }\n   \n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/2",
+							"raw": "{{apiUrl}}/post/{{post_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"post",
-								"2"
+								"{{post_id}}"
 							]
 						}
 					},
@@ -495,13 +517,13 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/3",
+							"raw": "{{apiUrl}}/post/{{post_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"post",
-								"3"
+								"{{post_id}}"
 							]
 						}
 					},
