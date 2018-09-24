@@ -2,6 +2,7 @@
 
 const 
 express = require('express'),
+_ = require('underscore'),
 router = express.Router();
 
 let models = require('../models');
@@ -13,6 +14,7 @@ router.get('/:id', getPost);
 router.get('/', getAllPosts);
 router.post('/', createPost);
 router.put('/:id', updatePost);
+router.patch('/:id', patchPost);
 router.delete('/:id', deletePost);
 module.exports = router;
 
@@ -22,11 +24,11 @@ function createPost(req, res, next) {
             {
                 postedBy: access.currentUser.id,
                 text: req.body.text,
-                walker: req.body.walker,
+                walker : null,
                 time: {
                    created : Date.now(),
                    lastModified : Date.now(),
-                   walkOrder : req.body.time.walkOrder
+                   walkOrder :  Date.now()
                 }
             }
         );
@@ -95,4 +97,29 @@ function updatePost(req, res, next) {
     });
 }
 
-
+function patchPost(req,res,next) {
+    Post.findById(req.params.id, function(err, post){
+        let authorised = false; //triggers when any actionallowed is fulfilled
+        if(access.isActionAllowed("assign_walker")){
+            authorised = true;
+            post.walker = access.isActionAllowed("assign_any_walker") ? req.body.walker : access.currentUser.id;
+        } 
+        if (access.isActionAllowed("modify_any_post") ||
+        (access.isActionAllowed("modify_post") && post.postedBy==access.currentUser.id)){
+            authorised = true;
+            let body = _.omit(req.body, 'walker');
+            let obj = {};
+            Object.keys(body).forEach(function(key) {
+                if(body[key]) obj[key] = body[key];
+            });
+            Object.assign(post, obj);
+        }
+        if(authorised){
+            post.time.lastModified = Date.now();
+            post.save();
+            res.status(200).json(post);
+        } else{
+            res.status(401).json({'message':'Unauthorized'});
+        }
+    });
+}

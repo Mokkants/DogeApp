@@ -16,7 +16,6 @@ router.delete('/:id', deleteDog);
 module.exports = router;
 
 function createDog(req, res, next) {
-    console.log(access.currentUser.actions);
     if(access.isActionAllowed('create_dog')){
         let dog = new Dog({
                 owner: access.currentUser.id,

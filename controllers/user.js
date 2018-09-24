@@ -22,7 +22,6 @@ function createUser(req, res, next) {
         if(!user){
             //double equals because it's string to boolean comparison
             let role = req.body.isWalker == true ? 'WALKER' : 'OWNER';
-            console.log(req.body.isWalker);
             let newUser = new User(
                 {
                     username: req.body.username,
