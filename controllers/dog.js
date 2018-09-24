@@ -47,7 +47,7 @@ function getAllDogs(req, res, next){
 function getDog(req, res, next) {
     Dog.findById(req.params.id, function (err, dog){
         if(err) return next(err);
-        if(!dog){return res.status(404).json({"message": "Dog not found"});}
+        if(dog == null){return res.status(404).json({"message": "Dog not found"});}
         res.status(200).json(dog);
     })
 }
@@ -55,7 +55,7 @@ function getDog(req, res, next) {
 function deleteDog(req, res, next){
     Dog.findOne({_id: req.params.id}, function(err, dog){
         if (err) {return next(err); }
-        if (!dog){return res.status(404).json({"message": "Dog not found"});}
+        if (dog == null){return res.status(404).json({"message": "Dog not found"});}
         if(access.isActionAllowed('delete_dog') && dog.owner == access.currentUser.id){
             dog.remove();
             res.status(204).json({"message":"Dog was deleted successfully."});
@@ -68,7 +68,7 @@ function deleteDog(req, res, next){
 function updateDog(req, res, next) {
     Dog.findById(req.params.id, function(err, dog){
         if (err) {return next(err);}
-        if (dog == null) { res.status(404).json({"message": "Dog not found."});}
+        if (dog == null) { return res.status(404).json({"message": "Dog not found."});}
         if(access.isActionAllowed('update_dog') && dog.owner == access.currentUser.id){
         dog.name = req.body.name;
         dog.breed = req.body.breed;
@@ -84,6 +84,8 @@ function updateDog(req, res, next) {
 
 function patchDog(req,res,next) {
     Dog.findById(req.params.id, function(err, dog){
+        if (err) {return next(err);}
+        if (dog == null) { return res.status(404).json({"message": "Dog not found."});}
         if (access.isActionAllowed("modify_any_dog") ||
         (access.isActionAllowed("modify_dog") && dog.owner==access.currentUser.id)){
             let body = _.omit(req.body, 'owner');

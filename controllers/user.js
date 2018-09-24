@@ -50,7 +50,8 @@ function createUser(req, res, next) {
 function getAllUsers(req, res, next){
     User.find(function(err, users){
         if(err) {return next(err);}
-        res.json({"data": users});
+        if(!users){return res.status(404).json("No users found");}
+        res.status(200).json({"data": users});
     });
 }
 
@@ -62,7 +63,7 @@ function getUser(req, res, next) {
                 {"message": "User not found"}
             );
         }
-        res.send(user);
+        res.status(200).send(user);
     })
 }
 

@@ -48,7 +48,7 @@ function getPost(req, res, next) {
     Post.findById(req.params.id, function (err, post){
         if(err) return next(err);
         if(!post){
-            res.status(404).json({"message": "Post not found"});
+            return res.status(404).json({"message": "Post not found"});
         }
         res.status(200).json(post);
     });
@@ -108,6 +108,10 @@ function updatePost(req, res, next) {
 function patchPost(req,res,next) {
     Post.findById(req.params.id, function(err, post){
         let authorised = false; //triggers when any actionallowed is fulfilled
+        if (err) {return next(err);}
+        if (post == null) {
+            return res.status(404).json({"message": "Post not found."});
+        }
         if(access.isActionAllowed("assign_walker")){
             authorised = true;
             post.walker = access.isActionAllowed("assign_any_walker") ? req.body.walker : access.currentUser.id;

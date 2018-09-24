@@ -1,24 +1,40 @@
 {
 	"info": {
-		"_postman_id": "d9377ece-dd73-3f6b-7796-efb7cfa0bd41",
-		"name": "DogeApp",
+		"_postman_id": "d29009cb-9698-4472-a466-a63b6160731b",
+		"name": "TestCases",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "User",
+			"name": "1",
 			"item": [
 				{
-					"name": "CreateUser",
+					"name": "CreateUser 201",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "b00b1921-9d37-4b19-895f-9eb7213ec9f1",
+								"id": "762dcdd7-d709-4d99-beda-de5513b76a84",
 								"type": "text/javascript",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"user_id\", jsonData._id);"
+									"postman.setEnvironmentVariable(\"user_id\", jsonData._id);",
+									"",
+									"",
+									"",
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ba72a72c-c219-4b6b-8c74-5816098f1da1",
+								"type": "text/javascript",
+								"exec": [
+									""
 								]
 							}
 						}
@@ -33,12 +49,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\" : \"bence110\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+							"raw": "{\n\t\"username\" : \"bence150\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/user",
+							"raw": "localhost:3000/api/user",
 							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
 							],
 							"path": [
 								"user"
@@ -48,87 +64,21 @@
 					"response": []
 				},
 				{
-					"name": "DeleteUser",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
+					"name": "CreateUser 401",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "25ed0969-de58-46e2-9add-a7890ab82971",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(401);",
+									"});"
+								]
 							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/user/{{user_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"user",
-								"{{user_id}}"
-							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllUsers",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/user",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetUser",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/user/{{user_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"user",
-								"{{user_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -139,91 +89,114 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\":\"bence120\"\n}"
+							"raw": "{\n\t\"username\" : \"bence150\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/login/authenticate",
+							"raw": "localhost:3000/api/user",
 							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
 							],
 							"path": [
-								"login",
-								"authenticate"
+								"user"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "UpdateUser",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/user/{{user_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"user",
-								"{{user_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PatchUser",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\" : \"Ben\"\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/user/{{user_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"user",
-								"{{user_id}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Dog",
-			"item": [
-				{
-					"name": "CreateDog",
+					"name": "CreatePost 401",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "8e59ad11-e726-4e0e-9f29-22b0f333cbbf",
+								"id": "846ce064-980a-4fd5-b005-d113160a43f4",
 								"type": "text/javascript",
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"dog_id\", jsonData._id);"
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(401);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/post/",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"post",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPost 401",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "caf99ac3-5666-4471-b170-d0ce9c2d72be",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(401);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/post/99999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"post",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateDog 401",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dd6f6c93-b8d1-4189-94be-ba966d4de0a4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(401);",
+									"});"
 								]
 							}
 						}
@@ -241,9 +214,9 @@
 							"raw": "{\n\t\"name\":\"Melia\",\n\t\"breed\": \"GSD\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/dog/",
+							"raw": "localhost:3000/api/dog/",
 							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
 							],
 							"path": [
 								"dog",
@@ -254,139 +227,102 @@
 					"response": []
 				},
 				{
-					"name": "PatchDog",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"breed\": \"GSD\"\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/dog/{{dog_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"dog",
-								"{{dog_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateDog",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/dog/{{dog_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"dog",
-								"{{dog_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{apiUrl}}/dog/{{dog_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"dog",
-								"{{dog_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllDogs",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{apiUrl}}/dog",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"dog"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetDog",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{apiUrl}}/dog/{{dog_id}}",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"dog",
-								"{{dog_id}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Post",
-			"item": [
-				{
-					"name": "CreatePost",
+					"name": "Login 400",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "319f76a7-6826-4312-9cf6-7849e0321141",
+								"id": "0027cc10-2d88-4cbe-a76d-d541ce8bbb61",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(400);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"bence\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/login/authenticate",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"login",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a4ecc6f-6a05-43b3-9d16-2cfc7103d252",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"bence150\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/login/authenticate",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"login",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreatePost 201",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d1388fe9-28e3-46ec-827c-dfd3de40102c",
 								"type": "text/javascript",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"post_id\", jsonData._id);"
+									"postman.setEnvironmentVariable(\"post_id\", jsonData._id);",
+									"",
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});"
 								]
 							}
 						}
@@ -404,9 +340,9 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/",
+							"raw": "localhost:3000/api/post/",
 							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
 							],
 							"path": [
 								"post",
@@ -417,9 +353,23 @@
 					"response": []
 				},
 				{
-					"name": "DeletePost",
+					"name": "GetPost 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e494c2b9-f9dd-445f-b85d-8020de6562f4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -431,9 +381,9 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/{{post_id}}",
+							"raw": "localhost:3000/api/post/{{post_id}}",
 							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
 							],
 							"path": [
 								"post",
@@ -444,7 +394,62 @@
 					"response": []
 				},
 				{
-					"name": "PatchPost",
+					"name": "GetPost 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ffb493a7-b653-4e03-bf7e-01953820777a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/post/999999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"post",
+								"999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchPost 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8299d8d-ee6d-4544-a54e-b51ab60006a4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -458,9 +463,50 @@
 							"raw": "{\n\t\"text\":\"bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/{{post_id}}",
+							"raw": "localhost:3000/api/post/9999999",
 							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
+							],
+							"path": [
+								"post",
+								"9999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchPost 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03a35327-207e-408c-918b-e2bf8d28626d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/post/{{post_id}}",
+							"host": [
+								"localhost:3000/api"
 							],
 							"path": [
 								"post",
@@ -471,7 +517,21 @@
 					"response": []
 				},
 				{
-					"name": "UpdatePost",
+					"name": "UpdatePost 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8ceaa464-8d62-4874-8cf8-6d3dbba07c8a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -485,9 +545,50 @@
 							"raw": "{\n\n   \"text\": \"new text\",\n   \"time\" : {\n    \t\"walkOrder\" : \"2018-09-27T10:37:27.207Z\"\n    }\n   \n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/{{post_id}}",
+							"raw": "localhost:3000/api/post/999999",
 							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
+							],
+							"path": [
+								"post",
+								"999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePost 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "69b760e5-e29c-4b20-9854-2082206dc29f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n   \"text\": \"new text\",\n   \"time\" : {\n    \t\"walkOrder\" : \"2018-09-27T10:37:27.207Z\"\n    }\n   \n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/post/{{post_id}}",
+							"host": [
+								"localhost:3000/api"
 							],
 							"path": [
 								"post",
@@ -498,7 +599,21 @@
 					"response": []
 				},
 				{
-					"name": "GetPost",
+					"name": "GetAllPosts 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "605e4053-1927-4147-8afb-4b3f6536ab0b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -512,36 +627,9 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/post/{{post_id}}",
+							"raw": "localhost:3000/api/post",
 							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"post",
-								"{{post_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllPosts",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/post",
-							"host": [
-								"{{apiUrl}}"
+								"localhost:3000/api"
 							],
 							"path": [
 								"post"
@@ -549,6 +637,866 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "DeletePost 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b15789f1-d95e-48f5-8fea-f84c5b90e446",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/post/99999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"post",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePost 204",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d716fa81-e007-478c-b0f8-2a549253c5af",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(204);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/post/{{post_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"post",
+								"{{post_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateDog 201",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e18315d-cc16-414f-9898-2fb3655d74e2",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"dog_id\", jsonData._id);",
+									"",
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Melia\",\n\t\"breed\": \"GSD\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/dog/",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDog 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "83aa2bd2-2769-44fa-aad7-e01149c887e5",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"{{dog_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetDog 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "593f8ab0-f1df-44b9-96b3-4b35d8800099",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/api/dog/9999999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"9999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllDogs 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e9a7a35-54ec-47c7-9790-ead57466c1ee",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/api/dog",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchDog 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef4bc349-5c5d-4264-a18f-92d5082fbc9b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"breed\": \"GSD\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/dog/99999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchDog 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a06c5a7d-6914-437a-a2ce-fdb0f918e333",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"breed\": \"GSD\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"{{dog_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateDog 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a605cf0-d0eb-4f11-b250-4b11b9cc344b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"{{dog_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateDog 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aa20e429-2cbd-428e-93df-8df84f62b7a8",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/dog/99999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"99999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteDog 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a41c0b16-4582-4cba-9b95-2479555a0af6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/api/dog/999999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteDog 204",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c71e7669-e797-4538-8305-3b22a7705794",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(204);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"dog",
+								"{{dog_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aa73f050-56ea-4c55-aeec-d776ad9ca0e6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/{{user_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfdc7826-0e0b-4be6-8857-10153d9857c8",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/9999999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"9999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsers 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "716ee519-0257-4222-91c7-2a5523a7954c",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6bc284ee-74b3-4294-89e8-fa6b8a6e487d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/{{user_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser 401",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8205916f-791f-4ba5-aae3-4d757a813029",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(401);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/99999999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"99999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchUser 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66eea3c4-9d36-4f3d-8f97-4e42045a3485",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Ben\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/{{user_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchUser 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a009606-1aac-4a47-bea2-8aad78ff8bbc",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Ben\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/99999999",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"99999999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser 401",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "786779bc-19af-4ca1-a87e-371c08367729",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(401);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/45",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"45"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser 204",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fade1fba-4704-4b87-b438-731e6f10a52c",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"JSON valid data check\", function () {",
+									"  pm.response.to.have.status(204);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/{{user_id}}",
+							"host": [
+								"localhost:3000/api"
+							],
+							"path": [
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bb6212e1-074e-42da-8a3c-6f0468611fb6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a2a6995-9673-4dec-b1e6-11c003c7944c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
