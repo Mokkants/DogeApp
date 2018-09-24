@@ -100,11 +100,10 @@ function updateUser(req, res, next) {
             }
             user.username = req.body.username,
             user.name = req.body.name;
-            user.location = req.body.location;
-            user.isWalker = req.body.isWalker;
+            user.location = _.clone(req.body.location);
            
             user.save();
-            res.json(user);
+            res.status(200).json(user);
         });
     }else{
         res.status(401).json({"message":"Unauthoirzed"});
