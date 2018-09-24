@@ -3,10 +3,13 @@
 module.exports = function(){
 
     let roles = require("./roles");
-    let isActionAllowed = (action) => currentUser.role.can.includes(action);
+    let isActionAllowed = (action) => currentUser.role.actions.includes(action);
    
     let currentUser = {
-        role : roles.default
+        id : -1,
+        role : {
+            actions : []
+        }
     };
 
     return {roles,isActionAllowed,currentUser};

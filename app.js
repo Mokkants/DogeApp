@@ -33,18 +33,6 @@ mongoose.connect(mongoURI, {useNewUrlParser: true}, function(err){
 
 let db = mongoose.connection;
 
-//TODO: remove access control from app.js
-//They are only here for people to see how to call them
-//Use both of these in the controllers when necessary
-
-//Access control
-let access = require('./access-control');
-
-console.log(access.currentUser);
-console.log(access.isActionAllowed("")); //false
-
-
-
 //Basic error handling
 app.use(function (err, req, res, next) {
   console.error(err.stack)
