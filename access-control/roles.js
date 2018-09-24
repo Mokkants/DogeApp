@@ -11,7 +11,7 @@ module.exports = function(){
             "create_dog","modify_dog","delete_dog","update_dog"]
         },
         'WALKER' : {
-            actions: ["view_post","modify_post",
+            actions: ["view_post","assign_walker",
             "modify_user","delete_user","view_user"
         ]
         },
