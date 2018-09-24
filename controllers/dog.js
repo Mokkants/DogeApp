@@ -26,13 +26,13 @@ function createDog(req, res, next) {
                 breed: req.body.breed,
                 isSocial: req.body.isSocial,
                 shortInfo: req.body.shortInfo
-        }).save(function (err) {
+        });
+        dog.save(function (err) {
             if (err) {
                 return next(err);
             }
-            res.status(201).json({'message':'Dog created successfully'});
+            res.status(201).json(dog);
         });
-        
     } else{
         res.status(401).json({"message":"Unauthorised"});
     }

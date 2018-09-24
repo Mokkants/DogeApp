@@ -36,7 +36,7 @@ function createPost(req, res, next) {
             if (err) {
                 return next(err);
             }
-            res.status(201).json({'message':'Post Created successfully'});
+            res.status(201).json(post);
         });
     }else{
         res.status(401).json({'message':'Unauthorized'});

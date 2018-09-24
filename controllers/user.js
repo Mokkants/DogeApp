@@ -15,7 +15,7 @@ let access = require('../access-control');
 
 router.post('/', createUser);
 router.get('/', getAllUsers);
-router.get('/:id', getUser);
+router.get('/:id', getUser); 
 router.put('/:id', updateUser);
 router.patch('/:id', patchUser);
 router.delete('/:id', deleteUser);
@@ -37,7 +37,7 @@ function createUser(req, res, next) {
                 if (err) {
                     return next(err);
                 }
-                res.status(201).json({"message":"User Created successfully"});
+                res.status(201).json(newUser);
             });
             
         } 
@@ -113,6 +113,8 @@ function updateUser(req, res, next) {
 
 function patchUser(req,res,next) {
     User.findById(req.params.id, function(err, user){
+        if(err){return next(err);}
+        if (user == null){return res.status(404).json({"message": "User not found"});}
         if (access.isActionAllowed("modify_any_user") ||
         (access.isActionAllowed("modify_user") && user.id==access.currentUser.id)){
             let body = _.omit(req.body,"isWalker");
@@ -129,5 +131,3 @@ function patchUser(req,res,next) {
         }
     });
 }
-
-
