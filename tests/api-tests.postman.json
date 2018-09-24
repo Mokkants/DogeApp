@@ -139,7 +139,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\":\"bence110\"\n}"
+							"raw": "{\n\t\"username\":\"bence120\"\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/login/authenticate",
@@ -268,19 +268,13 @@
 							"raw": "{\n\t\"breed\": \"GSD\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/dog/:id",
+							"raw": "{{apiUrl}}/dog/{{dog_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"dog",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
+								"{{dog_id}}"
 							]
 						}
 					},
@@ -301,19 +295,13 @@
 							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/dog/:{{dog_id}}",
+							"raw": "{{apiUrl}}/dog/{{dog_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"dog",
-								":{{dog_id}}"
-							],
-							"variable": [
-								{
-									"key": "",
-									"value": ""
-								}
+								"{{dog_id}}"
 							]
 						}
 					},
@@ -334,19 +322,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{apiUrl}}/dog/:{{dog_id}}",
+							"raw": "{{apiUrl}}/dog/{{dog_id}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"dog",
-								":{{dog_id}}"
-							],
-							"variable": [
-								{
-									"key": "",
-									"value": ""
-								}
+								"{{dog_id}}"
 							]
 						}
 					},
@@ -396,6 +378,19 @@
 			"item": [
 				{
 					"name": "CreatePost",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "319f76a7-6826-4312-9cf6-7849e0321141",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"post_id\", jsonData._id);"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
