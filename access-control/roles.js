@@ -6,7 +6,7 @@ module.exports = function(){
 
         'OWNER' : {
             actions: [
-            "view_post","create_post","modify_post","delete_post",
+            "view_post","create_post","modify_post","delete_post","update_post",
             "modify_user","delete_user","view_user",
             "create_dog","modify_dog","delete_dog","update_dog"]
         },

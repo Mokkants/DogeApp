@@ -84,18 +84,21 @@ function deletePost(req, res, next){
 };
 
 function updatePost(req, res, next) {
-    Post.findById(id, function(err, post){
+    Post.findById(req.params.id, function(err, post){
         if (err) {return next(err);}
         if (post == null) {
             return res.status(404).json({"message": "Post not found."});
         }
         if (access.isActionAllowed("update_any_post") || 
         (access.isActionAllowed("update_post") && post.postedBy == access.currentUser.id)){
+           
             post.text = req.body.text;
-            post.time.walkOrder = req.body.walkOrder;
+            post.time.walkOrder = req.body.time.walkOrder;
+            post.time.created = post.time.created; //We are not updating created time no matter what.
             post.time.lastModified = Date.now();
+            post.walker = null; //Reset walker
             post.save();
-            res.json(post);
+            res.status(200).json(post);
         }else{
             res.status(401).json({'message':'Unauthorized'});
         }
