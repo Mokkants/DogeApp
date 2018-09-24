@@ -8,6 +8,8 @@ _ = require('underscore');
 
 let models = require('../models');
 let User = models.User;
+let Dog = models.Dog;
+let Post = models.Post;
 let access = require('../access-control');
 
 
@@ -72,6 +74,16 @@ function deleteUser(req, res, next){
                 return res.status(404).json(
                     {"message": "User not found"});
             }
+            Dog.find({owner : user.id}).exec(function(err,dog){
+                dog.forEach(function(d){
+                    d.remove();
+                });
+            });
+            Post.find({postedBy : user.id}).exec(function(err,post){
+                post.forEach(function(p){
+                    p.remove();
+                });
+            });
             res.status(204).json({"message": "User deleted."});
         });
     }else{

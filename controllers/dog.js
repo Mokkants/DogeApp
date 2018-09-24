@@ -66,10 +66,10 @@ function deleteDog(req, res, next){
 }
 
 function updateDog(req, res, next) {
-    Dog.findById(id, function(err, dog){
+    Dog.findById(req.params.id, function(err, dog){
         if (err) {return next(err);}
         if (dog == null) { res.status(404).json({"message": "Dog not found."});}
-        if(access.isActionAllowed('create_dog') && dog.owner.id == access.currentUser.id){
+        if(access.isActionAllowed('update_dog') && dog.owner == access.currentUser.id){
         dog.name = req.body.name;
         dog.breed = req.body.breed;
         dog.isSocial = req.body.isSocial;
