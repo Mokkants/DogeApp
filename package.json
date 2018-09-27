@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "newman run ./tests/api-tests.postman.json",
-    "start": "node app.js"
+    "start": "node ./server/app.js"
   },
   "author": "",
   "license": "ISC",
