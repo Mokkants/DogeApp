@@ -69,10 +69,6 @@ function deletePost(req, res, next){
         if (err) {return next(err);}
         if (post == null){return res.status(404).json({"message": "Post not found"});}
 
-        console.log(access.isActionAllowed("delete_post"));
-         console.log(post.postedBy);
-         console.log(access.currentUser.id);
-
         if (access.isActionAllowed("delete_any_post") || 
         (access.isActionAllowed("delete_post") && post.postedBy == access.currentUser.id)){
             post.remove();

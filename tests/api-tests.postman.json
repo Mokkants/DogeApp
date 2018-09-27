@@ -52,12 +52,12 @@
 							"raw": "{\n\t\"username\" : \"bence150\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user",
+							"raw": "localhost:3000/api/users",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user"
+								"users"
 							]
 						}
 					},
@@ -92,12 +92,12 @@
 							"raw": "{\n\t\"username\" : \"bence150\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user",
+							"raw": "localhost:3000/api/users",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user"
+								"users"
 							]
 						}
 					},
@@ -132,12 +132,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/",
+							"raw": "localhost:3000/api/posts/",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								""
 							]
 						}
@@ -173,12 +173,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/99999",
+							"raw": "localhost:3000/api/posts/99999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"99999"
 							]
 						}
@@ -214,12 +214,12 @@
 							"raw": "{\n\t\"name\":\"Melia\",\n\t\"breed\": \"GSD\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/",
+							"raw": "localhost:3000/api/dogs/",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								""
 							]
 						}
@@ -340,12 +340,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/",
+							"raw": "localhost:3000/api/posts/",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								""
 							]
 						}
@@ -381,12 +381,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/{{post_id}}",
+							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"{{post_id}}"
 							]
 						}
@@ -422,12 +422,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/999999",
+							"raw": "localhost:3000/api/posts/999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"999999"
 							]
 						}
@@ -463,12 +463,12 @@
 							"raw": "{\n\t\"text\":\"bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/9999999",
+							"raw": "localhost:3000/api/posts/9999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"9999999"
 							]
 						}
@@ -504,12 +504,12 @@
 							"raw": "{\n\t\"text\":\"bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/{{post_id}}",
+							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"{{post_id}}"
 							]
 						}
@@ -545,12 +545,12 @@
 							"raw": "{\n\n   \"text\": \"new text\",\n   \"time\" : {\n    \t\"walkOrder\" : \"2018-09-27T10:37:27.207Z\"\n    }\n   \n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/999999",
+							"raw": "localhost:3000/api/posts/999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"999999"
 							]
 						}
@@ -586,12 +586,12 @@
 							"raw": "{\n\n   \"text\": \"new text\",\n   \"time\" : {\n    \t\"walkOrder\" : \"2018-09-27T10:37:27.207Z\"\n    }\n   \n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/{{post_id}}",
+							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"{{post_id}}"
 							]
 						}
@@ -627,12 +627,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post",
+							"raw": "localhost:3000/api/posts",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post"
+								"posts"
 							]
 						}
 					},
@@ -667,12 +667,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/99999",
+							"raw": "localhost:3000/api/posts/99999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"99999"
 							]
 						}
@@ -708,12 +708,12 @@
 							"raw": "{\n\t\"text\":\"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/post/{{post_id}}",
+							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"post",
+								"posts",
 								"{{post_id}}"
 							]
 						}
@@ -752,12 +752,12 @@
 							"raw": "{\n\t\"name\":\"Melia\",\n\t\"breed\": \"GSD\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/",
+							"raw": "localhost:3000/api/dogs/",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								""
 							]
 						}
@@ -785,12 +785,12 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"{{dog_id}}"
 							]
 						}
@@ -818,12 +818,12 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:3000/api/dog/9999999",
+							"raw": "localhost:3000/api/dogs/9999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"9999999"
 							]
 						}
@@ -851,12 +851,12 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:3000/api/dog",
+							"raw": "localhost:3000/api/dogs",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog"
+								"dogs"
 							]
 						}
 					},
@@ -891,12 +891,12 @@
 							"raw": "{\n\t\"breed\": \"GSD\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/99999",
+							"raw": "localhost:3000/api/dogs/99999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"99999"
 							]
 						}
@@ -932,12 +932,12 @@
 							"raw": "{\n\t\"breed\": \"GSD\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"{{dog_id}}"
 							]
 						}
@@ -973,12 +973,12 @@
 							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"{{dog_id}}"
 							]
 						}
@@ -1014,12 +1014,12 @@
 							"raw": "{\n\t  \"name\" : \"Gubboi\",\n      \"breed\" : \"Chihuahua\",\n      \"isSocial\": \"false\",\n      \"shortInfo\": \"bla bla bla\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/99999",
+							"raw": "localhost:3000/api/dogs/99999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"99999"
 							]
 						}
@@ -1055,12 +1055,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/999999",
+							"raw": "localhost:3000/api/dogs/999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"999999"
 							]
 						}
@@ -1096,12 +1096,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:3000/api/dog/{{dog_id}}",
+							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"dog",
+								"dogs",
 								"{{dog_id}}"
 							]
 						}
@@ -1137,12 +1137,12 @@
 							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/{{user_id}}",
+							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"{{user_id}}"
 							]
 						}
@@ -1178,12 +1178,12 @@
 							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/9999999",
+							"raw": "localhost:3000/api/users/9999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"9999999"
 							]
 						}
@@ -1219,12 +1219,12 @@
 							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user",
+							"raw": "localhost:3000/api/users",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user"
+								"users"
 							]
 						}
 					},
@@ -1259,12 +1259,12 @@
 							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/{{user_id}}",
+							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"{{user_id}}"
 							]
 						}
@@ -1300,12 +1300,12 @@
 							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/99999999",
+							"raw": "localhost:3000/api/users/99999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"99999999"
 							]
 						}
@@ -1341,12 +1341,12 @@
 							"raw": "{\n\t\"name\" : \"Ben\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/{{user_id}}",
+							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"{{user_id}}"
 							]
 						}
@@ -1382,12 +1382,12 @@
 							"raw": "{\n\t\"name\" : \"Ben\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/99999999",
+							"raw": "localhost:3000/api/users/99999999",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"99999999"
 							]
 						}
@@ -1423,12 +1423,12 @@
 							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/45",
+							"raw": "localhost:3000/api/users/45",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"45"
 							]
 						}
@@ -1464,12 +1464,12 @@
 							"raw": "{\n\t\"username\" : \"bence96\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3000/api/user/{{user_id}}",
+							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
 								"localhost:3000/api"
 							],
 							"path": [
-								"user",
+								"users",
 								"{{user_id}}"
 							]
 						}

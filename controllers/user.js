@@ -99,7 +99,7 @@ function updateUser(req, res, next) {
             if (user == null) {
                 return res.status(404).json({"message": "User not found."});
             }
-            user.username = req.body.username,
+            user.username = user.username,
             user.name = req.body.name;
             user.location = _.clone(req.body.location);
            

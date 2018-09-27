@@ -11,8 +11,8 @@ router.get('/api', function(req, res) {
 
 router.use(bodyParser);
 router.use('/api/login', require('./login'));
-router.use('/api/user', require('./user'));
-router.use('/api/post', require('./post'));
-router.use('/api/dog', require('./dog'));
+router.use('/api/users', require('./user'));
+router.use('/api/posts', require('./post'));
+router.use('/api/dogs', require('./dog'));
 
 module.exports = router;
