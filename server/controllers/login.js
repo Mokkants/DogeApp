@@ -23,7 +23,11 @@ function authenticate(req,res,next){
         } else{
             access.currentUser.id = user.id;
             access.currentUser.role = access.roles[user.role];            
+<<<<<<< HEAD
             res.status(200).json(user);
+=======
+            res.status(200).json({user});
+>>>>>>> 0b5d96074604db32627b411dad32fb35b21a08e8
         }
     });
 
