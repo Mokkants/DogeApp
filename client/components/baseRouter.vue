@@ -1,15 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div class = "row">
-        <nav class="navbar navbar-expand-sm bg-light navbar-light">
-            <ul class="navbar-nav">
-                <li class = "navbar-nav"><router-link to="/dogs" exact>Dogs</router-link></li>
-                <li class = "navbar-nav"><router-link to="/schedule" exact>Schedule</router-link></li>
-                <li class = "navbar-nav"><router-link to="/profile" exact>Profile</router-link></li>
-            <li>Log Out</li>
-            </ul>
-        </nav>
-=======
     <div>
         <div id="navbar">
         <router-link to="/" exact>
@@ -25,7 +14,6 @@
             <li><a>Log Out</a></li>
         </ul>
         </div>
->>>>>>> 0b5d96074604db32627b411dad32fb35b21a08e8
         <router-view></router-view>
     </div>
 </template>
@@ -36,12 +24,6 @@ module.export = {
 }
 </script>
 
-<<<<<<< HEAD
-<style>
-body{
-    width:100%;
-}
-=======
 <style scoped>
     #logo{
         flex-grow: 0;
@@ -105,6 +87,5 @@ body{
             font-size:15px;
         }
     }
->>>>>>> 0b5d96074604db32627b411dad32fb35b21a08e8
 </style>
 
