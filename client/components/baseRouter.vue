@@ -1,11 +1,13 @@
 <template>
-    <div>
-        <ul id="navbar">
-            <li><router-link to="/dogs" exact>Dogs</router-link></li>
-            <li><router-link to="/schedule" exact>Schedule</router-link></li>
-            <li><router-link to="/profile" exact>Profile</router-link></li>
+    <div class = "row">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <ul class="navbar-nav">
+                <li class = "navbar-nav"><router-link to="/dogs" exact>Dogs</router-link></li>
+                <li class = "navbar-nav"><router-link to="/schedule" exact>Schedule</router-link></li>
+                <li class = "navbar-nav"><router-link to="/profile" exact>Profile</router-link></li>
             <li>Log Out</li>
-        </ul>
+            </ul>
+        </nav>
         <router-view></router-view>
     </div>
 </template>

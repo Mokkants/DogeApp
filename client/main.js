@@ -7,8 +7,7 @@ Vue.use(VueRouter);
 
 let router = new VueRouter({
     routes: [
-        {path: '/', component: require("./components/baseRouter.vue") },
-        { path: '/schedule', component: require("./components/walkerSchedule.vue") },
+        {path:'/schedule', component: require("./components/walkerSchedule.vue") },
     ]
 });
 
