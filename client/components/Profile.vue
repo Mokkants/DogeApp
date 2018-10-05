@@ -16,7 +16,7 @@
                         <h1 class="media-heading"> Name </h1>
                         <p> <input type = "text" v-model = "editedUser.name" placeholder="Enter your name"> </p>
                         <h2 class="media-heading"> City </h2>
-                        <p> <input type = "text" v-model= "editedUser.location.city" placeholder="Enter your city"> </p>
+                        <p> <input type = "text" v-model= "editedUser.city" placeholder="Enter your city"> </p>
                         <p> <button class="btn" v-on:click="editProfile">Done</button></p>
                     </div> 
                     <div class="media-right col">
@@ -31,6 +31,7 @@
 <script>
 var axios = require('axios');
 var access = require('../../server/access-control');
+_ = require('underscore');
 module.exports = {
     name:"UserProfile",
     data(){
@@ -39,10 +40,7 @@ module.exports = {
             user: null,
             editedUser:{
                 name:'',
-                location: {
-                    city:'',
-                    country: ''
-                }
+                city:''
             },
             onEdit:true,
         }
@@ -63,7 +61,6 @@ module.exports = {
                 console.log(error);
             })
             .then(function(){
-                this.location.country = response.data.location.country;
             });
         },
         editProfile: function(){
@@ -73,9 +70,15 @@ module.exports = {
                     "Access-Control-Allow-Origin": "*",
                 }
             };
-            axios.patch('/api/users/5',this.editedUser, axiosConfig)
+            this.editedUser
+            axios.patch('/api/users/5',{
+                "name" : this.editedUser.name,
+                "location.city" : this.editedUser.city
+            }
+            , axiosConfig)
             .then(() => {
             this.onEdit = true;
+            this.getUser();
             })
         }
     },
