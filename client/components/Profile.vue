@@ -63,6 +63,7 @@ module.exports = {
                 console.log(error);
             })
             .then(function(){
+                this.location.country = response.data.location.country;
             });
         },
         editProfile: function(){
