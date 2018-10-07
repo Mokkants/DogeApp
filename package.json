@@ -23,6 +23,9 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
     "newman": "^4.1.0",
     "vueify": "^9.4.1"
   }
