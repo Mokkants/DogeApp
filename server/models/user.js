@@ -20,15 +20,11 @@ let User = new mongoose.Schema({
         },
         city: {
             type: String,
-            required: true,
+            required: true
         },
-        coordinates: {
-            latitude: {
-                type: Number,
-            },
-            longitude: {
-                type: Number,
-            }
+        address:{
+            type:String,
+            required:true
         }
     },
     role: {
