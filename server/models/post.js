@@ -7,7 +7,7 @@ let Schema = mongoose.Schema;
 let Post = new Schema({
     postedBy: {
       type:   Schema.Types.Number,
-      ref: 'Owner',
+      ref: 'User',
       required: true
     },
     text: {
@@ -15,7 +15,7 @@ let Post = new Schema({
     },
     walker: {
         type: Schema.Types.Number,
-        ref: 'Walker',
+        ref: 'User',
     },
     time: {
         created : {
