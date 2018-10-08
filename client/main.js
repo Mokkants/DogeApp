@@ -5,11 +5,12 @@ VueRouter = require('vue-router');
 Vue.use(VueRouter);
 
 let router = new VueRouter({
-    routes: [
-        
+    routes: [ { path: '/', component: require("./components/loginHome.vue") },
+    { path: '/register', component: require("./components/register.vue") },
+    { path: '/timeline', component: require("./components/timeline.vue") }
     ]
 });
-  
+
 let baseRouter = require("./components/baseRouter.vue");
 
 new Vue({
