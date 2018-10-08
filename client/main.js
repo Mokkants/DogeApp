@@ -7,12 +7,7 @@ Vue.use(VueRouter);
 
 let router = new VueRouter({
     routes: [
-<<<<<<< HEAD
         {path: '/profile', component: require('./components/Profile.vue')}
-=======
-        {path:'/schedule', component: require("./components/walkerSchedule.vue") },
-        {path:'/profile', component: require("./components/Profile.vue")},
->>>>>>> b42fd55f791139cdc0e59460360ee7d71701d9e1
     ]
 });
 
