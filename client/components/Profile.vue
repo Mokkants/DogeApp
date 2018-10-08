@@ -52,12 +52,12 @@ export default {
                 address:'',
             },
             onEdit:true,
-            id:'' //needs global variable
+            id:this.$store.state.userInstance._id
         }
     },
     methods: {
         getUser: function(){
-            axios.get('/api/users/' + id)
+            axios.get('/api/users/' + this.id)
             .then(response => {
                 if (response.status !== 200){
                     console.log("Wrong status code: " + response.status);
@@ -85,7 +85,7 @@ export default {
                     "Access-Control-Allow-Origin": "*",
                 }
             };
-            axios.patch('/api/users/' + id ,this.editedUser, axiosConfig)
+            axios.patch('/api/users/' + this.id ,this.editedUser, axiosConfig)
             .then(() => {
             this.onEdit = true;
             this.getUser();

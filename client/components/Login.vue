@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <div class="row">
@@ -24,7 +23,7 @@
         </div>
         <div class="row" style="margin-top:20px">
             <div class="col-sm-12" align="center">
-                <router-link to="/register" exact>Don't have an account yet? Register here!</router-link>
+                <a v-on:click="register">Don't have an account yet? Register here!</a>
             </div>
         </div>   
     </div> 
@@ -33,7 +32,7 @@
 <script>
 const axios = require('axios');
 
-module.exports = {
+export default {
     name:"loginHome",
     data(){
         return{
@@ -53,18 +52,23 @@ module.exports = {
             })
             .then(response => {
                 if(response.status === 200){
-                    alert("You are now logged in as "+loginUser.username);  
-                    window.location = '#/timeline'                      
+                    this.$store.commit('login',response.data.user);
                 }
-               
             })
             .catch(error =>{
-                if(error.response.status === 400){
-                    alert("Incorrect username");
+                if(error.response){
+                    if(error.response.status === 400){
+                        alert("Incorrect username");
+                    }
                 }
-                
+                else{
+                    console.log(error);
+                }
             });
-        },    
+        },
+        register:function(){
+            this.$emit('register');
+        }    
     }
 };
 </script>
