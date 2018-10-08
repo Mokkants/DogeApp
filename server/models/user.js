@@ -20,13 +20,12 @@ let User = new mongoose.Schema({
         },
         city: {
             type: String,
-            required: true,
+            required: true
         },
         address:{
             type:String,
             required:true
-            }
-        
+        }
     },
     role: {
         type: String,
