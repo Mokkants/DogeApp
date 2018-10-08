@@ -1,13 +1,26 @@
 const 
 Vue = require('vue'),
-VueRouter = require('vue-router');
+VueRouter = require('vue-router'),
+moment = require ('moment');
 
 Vue.use(VueRouter);
 
 let router = new VueRouter({
     routes: [
-        
+        {path: '/profile', component: require('./components/Profile.vue')}
     ]
+});
+
+Vue.filter('formatDay', function(value) {
+  if (value) {
+    return moment(String(value)).format('MMM D')
+  }
+});
+
+Vue.filter('formatHour', function(value) {
+  if (value) {
+    return moment(String(value)).format('hh:mm')
+  }
 });
   
 let baseRouter = require("./components/baseRouter.vue");

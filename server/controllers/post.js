@@ -58,7 +58,7 @@ function getPost(req, res, next) {
 }
 
 function getAllPosts(req, res, next){
-    Post.find(function(err, posts){
+    Post.find().populate('postedBy').exec(function(err, posts){
         if(err) {return next(err);}
         res.json({"data": posts});
     });
@@ -110,7 +110,21 @@ function patchPost(req,res,next) {
         }
         if(access.isActionAllowed("assign_walker")){
             authorised = true;
-            post.walker = access.isActionAllowed("assign_any_walker") ? req.body.walker : access.currentUser.id;
+            //admin access
+            if(access.isActionAllowed("assign_any_walker")){
+                post.walker = req.body.walker;
+            }
+            //claim post as walker
+            else if(post.walker === null){
+                post.walker = access.currentUser.id;
+            }
+            //if post is claimed by current walker 
+            else if((req.body.walker === null && post.walker == access.currentUser.id)){
+                    post.walker = req.body.walker;
+            }
+            else{
+                authorised = false;
+            }
         } 
         if (access.isActionAllowed("modify_any_post") ||
         (access.isActionAllowed("modify_post") && post.postedBy==access.currentUser.id)){
