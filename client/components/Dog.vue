@@ -65,16 +65,16 @@ export default {
         flex-grow:2;
     }
     .details div{
+        flex:1;
         margin:5px;
         padding:10px;
     }
     .description{
-        flex-grow:2;
+        flex-grow:3 !important;
         word-wrap: break-word;
     }
     .breed{
         text-align: center;
-        width:100px;
     }
     .sociability{
         text-align: center;
