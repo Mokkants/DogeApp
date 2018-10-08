@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div id="profile">
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="form-group col-sm-6">
@@ -31,7 +31,16 @@ module.exports = {
     data(){
         return{
             showById:null,
-            User: {username:'' },
+            User: {
+                location: {
+                    country: 'England',
+                    city: "London"
+                 },
+                role: "OWNER",
+                _id: 5,
+                username: '',
+                name: "okay",
+                __v: 0},
         }
     },
     methods:{
@@ -46,7 +55,8 @@ module.exports = {
             })
             .then(response => {
                 if(response.status === 200){
-                    alert("You are now logged in as "+loginUser.username);                        
+                    alert("You are now logged in as "+loginUser.username);  
+                    Vue.prototype.$currentUserID = this.User._id;                      
                 }
                
             })

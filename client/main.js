@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 let router = new VueRouter({
     routes: [
-        
+        {path: '/profile', component: require('./components/Profile.vue')}
     ]
 });
   
