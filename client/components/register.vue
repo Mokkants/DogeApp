@@ -8,14 +8,14 @@
         
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6"><a href="/" class="previous">&laquo; Previous</a></div>
+            <div class="col-sm-6"><a href="/" class="previous">&laquo; Back</a></div>
             <div class="col-sm-3"></div>
         </div>
         
         <form id="registerForm">
             <div class="row" style="margin-top:20px">
                 <div class="col-sm-4"></div>
-                <div class="form-group col-sm-4" method="createUser()" name="registerForm">
+                <div class="form-group col-sm-4"  name="registerForm">
                     <input type="username" class="form-control" id="usernameInput" placeholder="Username" v-model="User.username">
                 </div>
                 <div class="col-sm-4"></div>
@@ -39,6 +39,12 @@
                 <div class="form-group col-sm-4">
                     <input type="city" class="form-control" id="cityInput" placeholder="City" v-model="User.city">
                 </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="form-group col-sm-4">
+                    <input type="Address" class="form-control" id="cityInput"  placeholder="Address" v-model="User.address">
+                </div>
                 <div class="col-sm-4"></div>
             </div>
             <div class="row">
@@ -47,9 +53,9 @@
                     <label><input type="radio" name="optradio" style="margin-left:30px" value="true" v-model="User.isWalker">Dog Walker</label>
             </div>
             </div>
-            <div class="row">
+            <div class="row" id="reg-button">
                 <div class="col-sm-12" align="center">
-                    <button type="button" class="btn btn-default" v-on:click="createUser">Register</button>
+                    <button type="button" class="btn btn-outline-primary" id="reg-button" v-on:click="createUser">Register</button>
                 </div>
             </div>
         </form>
@@ -64,7 +70,7 @@ module.exports = {
     data(){
         return {
             showById:null,
-            User: {username:'', name:'', country:'', city:'', isWalker:'' }
+            User: {username:'', name:'', walker:'', city:'', address:'', isWalker:'' }
         };
     },
     methods:{
@@ -74,7 +80,8 @@ module.exports = {
                name : this.User.name,
                location:{
                country : this.User.country,
-               city : this.User.city
+               city : this.User.city,
+               address : this.User.address
                },
                isWalker : this.User.isWalker
            };
@@ -86,10 +93,16 @@ module.exports = {
             .then( response => {
                if(response.status==201){
                 alert('Your registration was succesful. Welcome to DogeApp,' + this.User.name);
-                window.location = '/index.html';
+                window.location = '/';
                }    
             });
         }
     }
 }
 </script>
+
+<style>
+.reg-button{
+    margin-top: 40px
+
+}

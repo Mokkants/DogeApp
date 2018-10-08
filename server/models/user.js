@@ -22,14 +22,11 @@ let User = new mongoose.Schema({
             type: String,
             required: true,
         },
-        coordinates: {
-            latitude: {
-                type: Number,
-            },
-            longitude: {
-                type: Number,
+        address:{
+            type:String,
+            required:true
             }
-        }
+        
     },
     role: {
         type: String,

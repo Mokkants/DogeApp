@@ -19,7 +19,7 @@
 
         <div class ="row">
             <div class="form-group col-sm-12" align="center" >
-                <button type="button" class="btn btn-default"  @click="authenticate">Sign in</button>
+                <button type="button" class="btn btn-outline-primary" id="signIn-button" @click="authenticate">Sign in</button>
             </div>
         </div>
         <div class="row" style="margin-top:20px">
@@ -53,7 +53,8 @@ module.exports = {
             })
             .then(response => {
                 if(response.status === 200){
-                    alert("You are now logged in as "+loginUser.username);                        
+                    alert("You are now logged in as "+loginUser.username);  
+                    window.location = '#/timeline'                      
                 }
                
             })
@@ -67,3 +68,11 @@ module.exports = {
     }
 };
 </script>
+
+<style>
+#signIn-button{
+        width: 20%;
+margin-left: 40%;
+margin-right: 40%;
+}
+</style>
