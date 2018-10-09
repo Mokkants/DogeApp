@@ -23,7 +23,7 @@
         </div>
         <div class="row" style="margin-top:20px">
             <div class="col-sm-12" align="center">
-                <a v-on:click="register">Don't have an account yet? Register here!</a>
+                <a class="link" v-on:click="register">Don't have an account yet? Register here!</a>
             </div>
         </div>   
     </div> 
@@ -73,10 +73,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #signIn-button{
         width: 20%;
 margin-left: 40%;
 margin-right: 40%;
+}
+.link{
+    color: #007bff !important;
+}
+.link:hover{
+    text-decoration: underline #007bff !important;
+    cursor: pointer;
 }
 </style>

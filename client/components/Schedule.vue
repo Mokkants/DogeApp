@@ -1,32 +1,34 @@
 <template>
-<div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6">
-       <table>
-           <tr>
-               <td>Date</td>
-               <td>Time</td>
-               <td>Location</td>
-           </tr>
-           <tr v-for="post in posts" :key="post.time.walkOrder">
-               <td class="date">{{post.time.walkOrder | formatDay}} </td>
-               <td class="time">{{post.time.walkOrder | formatHour}}</td>
-               <td>
-                    <ul>
-                        <li class="schedule_event" v-for="item in post.details" v-bind:key="item.postId" @mouseover="showById=item.postId" @mouseout="showById=null">
-                            <div class="event_location">
-                            {{item.location.city}}
-                            </div>
-                            <div class="cancelbtn" @click="cancelClaimToPost(item.postId)" v-bind:class="[showById===item.postId ? 'revealed' : '']">
-                              X
-                            </div>
-                        </li>
-                    </ul>
-                </td>
-           </tr>
-       </table>
-       </div>
-    <div class="col-sm-3"></div>
+<div class="main">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+        <table>
+            <tr>
+                <td>Date</td>
+                <td>Time</td>
+                <td>Location</td>
+            </tr>
+            <tr v-for="post in posts" :key="post.time.walkOrder">
+                <td class="date">{{post.time.walkOrder | formatDay}} </td>
+                <td class="time">{{post.time.walkOrder | formatHour}}</td>
+                <td>
+                        <ul>
+                            <li class="schedule_event" v-for="item in post.details" v-bind:key="item.postId" @mouseover="showById=item.postId" @mouseout="showById=null">
+                                <div class="event_location">
+                                {{item.location.address}}
+                                </div>
+                                <div class="cancelbtn" @click="cancelClaimToPost(item.postId)" v-bind:class="[showById===item.postId ? 'revealed' : '']">
+                                X
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+            </tr>
+        </table>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
 </div>
 </template>
 
@@ -129,6 +131,9 @@ table{
 tr{
     padding-bottom:15px;
     border-bottom:1px solid #444; 
+}
+.main{
+    margin-top:50px;
 }
 .schedule_event{
     display: flex;

@@ -43,7 +43,7 @@ export default {
     data(){
         return{
             showById:null,
-            user: null,
+            user: this.$store.state.userInstance,
             editedUser: null,
             editData:{
                 name:'',
@@ -75,10 +75,10 @@ export default {
             });
         },
         doneEdit: function(){
-            this.editedUser.name = this.editData.name;
-            this.editedUser.location.country = this.editData.country;
-            this.editedUser.location.city = this.editData.city;
-            this.editedUser.location.address = this.editData.address;
+            this.editedUser.name = this.editData.name || this.editedUser.location.name;
+            this.editedUser.location.country = this.editData.country || this.editedUser.location.country;
+            this.editedUser.location.city = this.editData.city || this.editedUser.location.city;
+            this.editedUser.location.address = this.editData.address || this.editedUser.location.address;
             let axiosConfig = {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',

@@ -8,12 +8,12 @@
 
 <script>
 
-import Login from './Login.vue'
-import Home from './Home.vue'
-import Register from './Register.vue'
+import Login from './components/Login.vue'
+import Home from './components/Home.vue'
+import Register from './components/Register.vue'
 
 export default{
-    name:"BaseRouter",
+    name:"App",
     data(){
         return{
             onRegister : false

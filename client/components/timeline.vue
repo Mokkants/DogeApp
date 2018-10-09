@@ -42,9 +42,9 @@
     <div class="row" v-for="post in posts" v-bind:key="post._id">
         <div class="col-sm-2"></div>
         <div  class="col-sm-8 media border p-3 mt-3 mb-3">
-                <div class="col-sm-3 postStyle"><p class="postStyle">Created by:</p> {{post.postedBy}}</div>
+                <div class="col-sm-3 postStyle"><p class="postStyle">Created by:</p> {{post.postedBy.name}}</div>
                 <div class="col-sm-6 postStyle"><p class="postStyle">Description:</p>  {{post.text}} </div>
-                <div class="col-sm3 postStyle">Post <p class="postStyle">created:</p> {{post.time.created}}</div>
+                <div class="col-sm3 postStyle">Post <p class="postStyle">created:</p> {{post.time.created | formatDate}}</div>
         </div>
         <div class="col-sm-2"></div>
     </div>

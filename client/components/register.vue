@@ -8,7 +8,7 @@
         
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6"><a v-on:click="back" class="previous">&laquo; Back</a></div>
+            <div class="col-sm-6"><a v-on:click="back" class="previous link">&laquo; Back</a></div>
             <div class="col-sm-3"></div>
         </div>
         
@@ -104,8 +104,19 @@ module.exports = {
 }
 </script>
 
-<style>
-.reg-button{
-    margin-top: 40px
-
+<style scoped>
+img{
+    height:200px;
 }
+.reg-button{
+    margin-top: 40px;
+    margin-bottom:50px;
+}
+.link{
+    color: #007bff !important;
+}
+.link:hover{
+    text-decoration: underline #007bff !important;
+    cursor: pointer;
+}
+</style>

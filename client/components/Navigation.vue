@@ -7,10 +7,11 @@
         </div>
         </router-link>
         <ul>
-            <li><router-link to="/dogs" exact>Dogs</router-link></li>
-            <li><router-link to="/schedule" exact>Schedule</router-link></li>
-            <li><router-link to="/profile" exact>Profile</router-link></li>
-            <li v-on:click="logout"><a>Log Out</a></li>
+            <router-link to="/" exact><li>Home</li></router-link>
+            <router-link to="/dogs" exact v-if="userType=='OWNER'"><li>Dogs</li></router-link>
+            <router-link to="/schedule" exact v-if="userType=='WALKER'"><li>Schedule</li></router-link>
+            <router-link to="/profile" exact><li>Profile</li></router-link>
+            <a v-on:click="logout"><li>Log Out</li></a>
         </ul>
         </div>
 </template>
@@ -20,6 +21,11 @@ export default{
     methods:{
         logout:function(){
              this.$store.commit('logout');
+        }
+    },
+    computed:{
+        userType(){
+            return this.$store.state.userInstance.role;
         }
     }
 }
@@ -70,6 +76,16 @@ export default{
         color:#333;
     }
     @media screen and (max-width: 500px) {
+        #navbar{
+            display:flex;
+            flex-direction: column;
+        }
+        ul{
+            display: flex;
+        }
+        li{
+            flex:1;
+        }
         #logo_txt {
             display: none;
         }
