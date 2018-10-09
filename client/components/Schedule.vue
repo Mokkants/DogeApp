@@ -3,7 +3,8 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-        <table>
+        <span class="no_result" v-if="posts.length === 0">No result.</span>
+        <table v-if="posts.length !== 0">
             <tr>
                 <td>Date</td>
                 <td>Time</td>
@@ -64,6 +65,7 @@ module.exports = {
             for (let i = 0; i < data.length; i++) {
                 this.posts.push(data[i]);
             }
+            console.log(this.posts);
             })
             .catch(e => {
                 this.posts.length = 0;
@@ -134,6 +136,13 @@ tr{
 }
 .main{
     margin-top:50px;
+}
+.no_result{
+    display:flex;
+    justify-content: center;
+    width:100%;
+    color:#999;
+    font-size:40px;
 }
 .schedule_event{
     display: flex;
