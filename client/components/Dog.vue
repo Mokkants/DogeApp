@@ -23,7 +23,7 @@ export default {
     props:['dog'],
     data : function(){
         return {
-
+            
         }
     },
     computed:{
