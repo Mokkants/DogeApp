@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="mdia-boxs">
-            <h5 class="media-heading">{{ post.postedBy.ref }}<small><i>&nbsp;Posted: {{ post.time.created }}</i></small></h5>
+        <div class="media-boxs" v-for="post in posts" v-bind:key="post._id">
+            <h5 class="media-heading">{{ post.postedBy }}<small><i>&nbsp;Posted: {{ post.time.created | formatDate }}</i></small></h5>
             <div class="media">
                 <div class="media-left">
-                <img src="image" alt="Image" class="mr-3" style="width:120px">
+                <img src="resources/images/user.png" alt="User" class="mr-3" style="width:120px">
                 </div>
                 <div class="media-body mr-3">
                     <div class="tm-description-box">
@@ -20,7 +20,7 @@
                                 <td>Post Status:</td>
                             </tr>
                             <tr>
-                                <td>{{ post.text.walkTime }}</td>
+                                <td>{{ post.time.walkOrder }}</td>
                                 <td>
                                     <p v-if="!isClaimed">Available</p>
                                     <p v-else>Claimed by {{ claimedBy }}</p>
@@ -31,16 +31,16 @@
                     <div class="col-sm-3"></div>
                 </div>
                 </div>
-                <div v-show="isWalker">
-                    <button v-on:click="claimToPost(item.postId)"
+                <div v-show="isWalker" v-bind="walker">
+                    <button v-on:click="claimToPost(post._id)"
                         :disabled="isClaimed"
                         :class="{ disabledButton: isClaimed}"
-                        v-bind:key="item.postId"
+                        v-bind:key="post._id"
                         >
                         Claim
                     </button>
-                    <button v-show="isClaimed" @click="cancelClaimToPost(item.postId)"
-                        v-bind:class="[showById===item.postId ? 'revealed' : '']"
+                    <button v-show="isClaimed" @click="cancelClaimToPost(post._id)"
+                        v-bind:class="post._id"
                         >
                         Cancel
                     </button>    
@@ -59,12 +59,18 @@ module.exports = {
         isWalker:{
             type: Boolean,
             required: true
+        },
+        isClaimed:{
+            type: Boolean,
+            required: false 
         }
     },
     data(){
         return{
             showById:null,
             posts:[],
+            post: {postedBy:'', text:'', walker:'', created:'', lastModified:'', walkOrder:'' },
+            User: {isWalker:''}
         }
     },
     methods: {
@@ -88,9 +94,14 @@ module.exports = {
                 url: '/api/posts/'+id,
                 data:{
                     claimedBy: this.post.walker,
-                    status: isClaimed
                 }
             })
+            .then( response => {
+               if(response.status==201){
+                alert('successfully claimed');
+                this.isClaimed()
+               }    
+            });
         },
         cancelClaimToPost: function(id){
             axios({
@@ -98,9 +109,19 @@ module.exports = {
                 url: '/api/posts/'+id,
                 data: {
                     walker: null,
-                    status: !isClaimed
                 }
+            })
+            .then( response => {
+               if(response.status==201){
+                alert('claim cancelled');
+                this.isClaimed(flase) 
+               }    
             });
+        }
+    },
+    computed:{
+        isClaimed(){
+            return true
         }
     }
 }
