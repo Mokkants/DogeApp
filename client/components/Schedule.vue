@@ -3,14 +3,14 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-        <span class="no_result" v-if="posts.length === 0">No result.</span>
-        <table v-if="posts.length !== 0">
+        <span class="no_result" v-show="postsCondensed.length === 0 || showNoResult">No result.</span>
+        <table v-show="postsCondensed.length !== 0 && !showNoResult">
             <tr>
                 <td>Date</td>
                 <td>Time</td>
                 <td>Location</td>
             </tr>
-            <tr v-for="post in posts" :key="post.time.walkOrder">
+            <tr v-for="post in postsCondensed" :key="post.time.walkOrder">
                 <td class="date">{{post.time.walkOrder | formatDay}} </td>
                 <td class="time">{{post.time.walkOrder | formatHour}}</td>
                 <td>
@@ -19,7 +19,7 @@
                                 <div class="event_location">
                                 {{item.location.address}}
                                 </div>
-                                <div class="cancelbtn" @click="cancelClaimToPost(item.postId)" v-bind:class="[showById===item.postId ? 'revealed' : '']">
+                                <div class="cancelbtn" v-on:click="cancelClaimToPost(item.postId, $event)" v-bind:class="[showById===item.postId ? 'revealed' : '']">
                                 X
                                 </div>
                             </li>
@@ -45,7 +45,8 @@ module.exports = {
     data(){
        return{
         showById:null,
-        posts:[]
+        posts:[],
+        postsCondensed:[]
        }
     },
     methods:{
@@ -54,26 +55,43 @@ module.exports = {
             .get('/api/posts/')
             .then(response => {
                 if(response.status === 200){
-                    return this._getPostsCondensed(response.data.data);
+                    let data = response.data.data;
+                    this.posts.length = 0;
+                    for (let i = 0; i < data.length; i++) {
+                        if(data[i].walker === this.user._id){
+                            this.posts.push(data[i]);
+                        }
+                    }
+                     this._getPostsCondensed();
                 }
                 else if (response.status===401){
                     console.log("unauthorized");
                 }
-            })
-            .then(data => {
-            this.posts.length = 0;
-            for (let i = 0; i < data.length; i++) {
-                this.posts.push(data[i]);
-            }
-            console.log(this.posts);
             })
             .catch(e => {
                 this.posts.length = 0;
                 console.log(e)
             });
         },
+        cancelClaimToPost: function(id, event){
 
-        cancelClaimToPost: function(id){
+            let newPosts = [];
+            for(let i = 0; i < this.posts.length; i++){
+                if(this.posts[i]._id !== id){
+                    newPosts.push(this.posts[i]);
+                }
+            }
+            this.posts = newPosts;
+
+            let scheduleEvent = event.target.parentNode;
+            if(scheduleEvent.parentNode.childNodes.length === 1){
+                scheduleEvent.parentNode.parentNode.removeChild(scheduleEvent.parentNode);
+            }else{
+                scheduleEvent.parentNode.removeChild(scheduleEvent);
+            }
+            
+            this._getPostsCondensed();
+
             axios({
                 method: 'patch',
                 url: '/api/posts/'+id,
@@ -82,37 +100,45 @@ module.exports = {
                 }
             });
         },
-
         //Simplifies post JSON so it's more suited for this view
-        _getPostsCondensed : function(data){
+        _getPostsCondensed : function(){
+        let data=this.posts;
         let condensed = [];
         for (let i = 0; i < data.length; i++) {
-            let item = {
-                time:{
-                    walkOrder : data[i].time.walkOrder
-                },
-                details:[
-                    {
-                        location:data[i].postedBy.location,
-                        postId:data[i]._id
+                let item = {
+                    time:{
+                        walkOrder : data[i].time.walkOrder
+                    },
+                    details:[
+                        {
+                            location:data[i].postedBy.location,
+                            postId:data[i]._id
+                        }
+                    ]
+                }
+                let foundDup = false;
+                for (let j = 0; j< condensed.length; j++){
+                    if(moment(String(condensed[j].time.walkOrder)).format('MMMM DD hh:mm') == moment(String(data[i].time.walkOrder)).format('MMMM DD hh:mm')){
+                        foundDup = true;
+                        condensed[j].details.push({
+                            location:(data[i].postedBy.location),
+                            postId:data[i]._id
+                        });
                     }
-                ]
-            }
-            let foundDup = false;
-            for (let j = 0; j< condensed.length; j++){
-                if(moment(String(condensed[j].time.walkOrder)).format('MMMM DD hh:mm') == moment(String(data[i].time.walkOrder)).format('MMMM DD hh:mm')){
-                    foundDup = true;
-                    condensed[j].details.push({
-                        location:(data[i].postedBy.location),
-                        postId:data[i]._id
-                    });
+                }
+                if(!foundDup){
+                    condensed.push(item);
                 }
             }
-            if(!foundDup){
-             condensed.push(item);
-            }
+        this.postsCondensed = condensed;
         }
-        return condensed;
+    },
+    computed:{
+        user(){
+            return this.$store.state.userInstance;
+        },
+        showNoResult(){
+            return this.posts.length >= 0 ? false : true; 
         }
     },
     mounted () {
