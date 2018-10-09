@@ -8,7 +8,7 @@
         
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6"><a href="/" class="previous">&laquo; Back</a></div>
+            <div class="col-sm-6"><a v-on:click="back" class="previous">&laquo; Back</a></div>
             <div class="col-sm-3"></div>
         </div>
         
@@ -93,9 +93,12 @@ module.exports = {
             .then( response => {
                if(response.status==201){
                 alert('Your registration was succesful. Welcome to DogeApp,' + this.User.name);
-                window.location = '/';
+                this.$emit("back")
                }    
             });
+        },
+        back:function(){
+            this.$emit("back");            
         }
     }
 }

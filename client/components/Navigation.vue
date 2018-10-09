@@ -10,14 +10,18 @@
             <li><router-link to="/dogs" exact>Dogs</router-link></li>
             <li><router-link to="/schedule" exact>Schedule</router-link></li>
             <li><router-link to="/profile" exact>Profile</router-link></li>
-            <li><a>Log Out</a></li>
+            <li v-on:click="logout"><a>Log Out</a></li>
         </ul>
         </div>
 </template>
 
 <script>
 export default{
-
+    methods:{
+        logout:function(){
+             this.$store.commit('logout');
+        }
+    }
 }
 </script>
 
@@ -49,6 +53,7 @@ export default{
         flex-grow: 1;
         list-style-type: none;
         margin:0px;
+        user-select: none;
     }
     #navbar li{
         padding:10px;
