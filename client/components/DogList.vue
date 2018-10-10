@@ -9,7 +9,7 @@
     <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
-        <button class="success-btn" onclick="document.getElementById('dog-create-modal').style.display='block'" style="width:auto;" exact>Add a dog</button>
+        <button class="add-dog-btn" onclick="document.getElementById('dog-create-modal').style.display='block'" style="width:auto;" exact>Add dog</button>
         <dog v-for="dog in dogs" :key="dog._id" :dog="dog" v-on:removed="onRemove" v-on:edited="onEdit"></dog>        
     </div>
     <div class="col-sm-2"></div>
@@ -199,6 +199,15 @@ var createModal = document.getElementById('dog-create-modal');
 }
 </script>
 <style>
+.add-dog-btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
 modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
