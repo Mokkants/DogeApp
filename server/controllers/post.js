@@ -58,7 +58,7 @@ function getPost(req, res, next) {
 }
 
 function getAllPosts(req, res, next){
-    Post.find().populate('postedBy').exec(function(err, posts){
+    Post.find().populate('postedBy').sort('+time.walkOrder').exec(function(err, posts){
         if(err) {return next(err);}
         res.json({"data": posts});
     });
