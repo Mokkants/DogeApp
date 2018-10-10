@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="mdia-boxs" v-for="post in posts" :key="post.time.created">
+        <div class="media-boxs" v-for="post in posts" :key="post.time.created">
             <h5>{{ post.postedBy }}<small><i>&nbsp;Posted: {{ post.time.created }}</i></small></h5>
             <div class="media">
                 <div class="media-left">
