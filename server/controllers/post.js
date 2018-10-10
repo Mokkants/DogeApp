@@ -28,7 +28,7 @@ function createPost(req, res, next) {
                 time: {
                    created : Date.now(),
                    lastModified : Date.now(),
-                   walkOrder :  Date.now()
+                   walkOrder :  req.body.time.walkOrder
                 }
             }
         );
