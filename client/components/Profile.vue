@@ -25,10 +25,10 @@
                         <p> <input type = "text" v-model = "editData.country" placeholder="Enter your country"> </p>
                         <h4 class="media-heading"> Address </h4>
                         <p> <input type = "text" v-model = "editData.address" placeholder="Enter your address"> </p>
-                        <p> <button class="btn" v-on:click="doneEdit">Done</button></p>
+                        <p> <button class="btn done" v-on:click="doneEdit">Done</button></p>
                     </div> 
                     <div class="media-right col">
-                        <button type="button" class="btn" v-on:click="onEdit = !onEdit"> Edit </button>
+                        <button type="button" class="btn edit" v-on:click="onEdit = !onEdit"> Edit </button>
                     </div>
                 </div> 
             </div>
@@ -97,3 +97,14 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+
+    .edit, .done{
+        border:2px solid rgba(160,180,245,0.7);
+    }
+
+    @media screen and (max-width: 500px) {
+    
+    }
+</style>
