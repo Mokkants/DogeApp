@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 let router = new VueRouter({
     routes: [ 
-    { path: '/', component: require("./components/Timeline.vue") },
+    { path: '/', component: require("./components/timeline.vue") },
     { path: '/profile', component: require("./components/Profile.vue")},
     { path: '/schedule', component: require("./components/Schedule.vue")},
     ]
