@@ -12,21 +12,42 @@
     <div class="col-sm-2"></div>
     </div>
 
-    <div id="dog-modal" class="modal">
+    <button class="success-btn" onclick="document.getElementById('dog-create-modal').style.display='block'" style="width:auto;" exact>Add a dog</button>
+    <div id="dog-create-modal" class="modal">
         <form class="modal-content animate" action="#/dogs">
              <div class="imgcontainer">
-               <span onclick="document.getElementById('dog-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
+               <span onclick="document.getElementById('dog-create-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
                <img src="resources/images/logo.png" width="150" alt="Avatar" class="avatar">
              </div>
              <div class="container">
                 <h1 class="media-heading"> Name </h1>
-                <p> <input type = "text" v-model = "editData.name" placeholder="Enter dog's name"> </p>
+                <p> <input type = "text" v-model = "dogData.name" placeholder="Enter dog's name"> </p>
                 <h2 class="media-heading"> Breed </h2>   
-                <p> <input type = "text" v-model = "editData.breed" placeholder="Enter dog's breed"> </p>
+                <p> <input type = "text" v-model = "dogData.breed" placeholder="Enter dog's breed"> </p>
                 <h3 class="media-heading"> Social? </h3>
-                    <input type = "checkbox" v-model = "editData.isSocial">
+                    <input type = "checkbox" v-model = "dogData.isSocial">
                 <h4 class="media-heading"> Description </h4>   
-                <p> <input type = "text" v-model= "editData.shortInfo" placeholder="Enter dog's info"> </p>
+                <p> <input type = "text" v-model= "dogData.shortInfo" placeholder="Enter dog's info"> </p>
+                <p> <button class="btn" v-on:click="createDog">Done</button></p>   
+             </div>
+        </form>
+    </div>
+
+    <div id="dog-edit-modal" class="modal">
+        <form class="modal-content animate" action="#/dogs">
+             <div class="imgcontainer">
+               <span onclick="document.getElementById('dog-edit-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
+               <img src="resources/images/logo.png" width="150" alt="Avatar" class="avatar">
+             </div>
+             <div class="container">
+                <h1 class="media-heading"> Name </h1>
+                <p> <input type = "text" v-model = "dogData.name" placeholder="Enter dog's name"> </p>
+                <h2 class="media-heading"> Breed </h2>   
+                <p> <input type = "text" v-model = "dogData.breed" placeholder="Enter dog's breed"> </p>
+                <h3 class="media-heading"> Social? </h3>
+                    <input type = "checkbox" v-model = "dogData.isSocial">
+                <h4 class="media-heading"> Description </h4>   
+                <p> <input type = "text" v-model= "dogData.shortInfo" placeholder="Enter dog's info"> </p>
                 <p> <button class="btn" v-on:click="doneEdit">Done</button></p>   
              </div>
         </form>
@@ -46,8 +67,8 @@ export default {
     },
     data(){
         return{
-            newDog:'',
-            editData:{
+            editedDog: null,
+            dogData:{
                 name:'',
                 breed:'',
                 shortInfo:'',
@@ -58,6 +79,28 @@ export default {
         }
     },
     methods: {
+        createDog: function(){
+           let newDog = {
+               owner: this.user._id,
+               name : this.dogData.name,
+               breed : this.dogData.breed,
+               isSocial : this.dogData.isSocial,     
+               shortInfo : this.dogData.shortInfo,
+           };
+            axios({
+                method: 'post',
+                url: '/api/dogs',
+                data: newDog   
+            })
+            .then( response => {
+               if(response.status==201){
+                alert('added a new dog');
+                document.getElementById('dog-create-modal').style.display='none';
+                this.$router.go(this.$router.currentRoute);
+               }    
+            });
+        },
+
         getDogs: function () {
             axios.get('/api/dogs/')
             .then(
@@ -101,27 +144,27 @@ export default {
                 console.log(error);
             })
             .then(function () {
+                this.$router.go(this.$router.currentRoute);
             });
         },
         onEdit: function(data){
-            document.getElementById("dog-modal").style.display="block";
-            this.newDog = data;
+            document.getElementById("dog-edit-modal").style.display="block";
+            this.editedDog = data;
         },
         doneEdit: function(data){
-            this.newDog.name = this.editData.name;
-            this.newDog.breed = this.editData.breed;
-            this.newDog.shortInfo = this.editData.shortInfo;
-            this.newDog.isSocial = this.editData.is
+            this.editedDog.name = this.dogData.name;
+            this.editedDog.breed = this.dogData.breed;
+            this.editedDog.shortInfo = this.dogData.shortInfo;
+            this.editedDog.isSocial = this.dogData.isSocial;
             let axiosConfig = {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
                     "Access-Control-Allow-Origin": "*",
                 }
             };
-            axios.patch('/api/dogs/' + this.newDog._id, this.newDog, axiosConfig)
+            axios.patch('/api/dogs/' + this.editedDog._id, this.editedDog, axiosConfig)
             .then(() => {
-                document.getElementById('dog-modal').style.display='none'
-
+                document.getElementById('dog-edit-modal').style.display='none';
             });
         }
     },
@@ -136,12 +179,17 @@ export default {
     
 
 }
-var modal = document.getElementById('dog-modal');
+var editModal = document.getElementById('dog-edit-modal');
+var createModal = document.getElementById('dog-create-modal');
+
  
  //this doesnt work at the moment
     window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == editModal) {
+        editModal.style.display = "none";
+    }
+    else if (event.target == createModal){
+        createModal.style.display = "none";
     }
 }
 </script>
