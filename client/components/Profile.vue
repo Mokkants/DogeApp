@@ -4,9 +4,9 @@
             <div class="card m-3 col-sm-10">
                 <div class="media p-3 mt-3 mb-3">
                     <div class="media-left col">
-                        <img src="https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png" class="media-object" style="width:60px">
+                        <img src="https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png" class="media-object" style="width:150px">
                     </div>
-                    <div class="media-body col-sm-4" v-show="onEdit">
+                    <div class="media-body col-sm-4 data" v-show="onEdit">
                         <h1 class="media-heading"> Name </h1>
                         <p> {{user.name}} </p>
                         <h2 class="media-heading"> City </h2>
@@ -16,15 +16,15 @@
                         <h3 class="media-heading"> Address </h3>
                         <p> {{user.location.address}} </p>
                     </div>
-                    <div class="media-body col-sm-4" v-show="!onEdit">
+                    <div class="media-body col-sm-4 data" v-show="!onEdit">
                         <h1 class="media-heading"> Name </h1>
-                        <p> <input type = "text" v-model = "editData.name" placeholder="Enter your name"> </p>
+                        <p> <input type = "text" v-model = "editData.name" :placeholder="editedUser.name"> </p>
                         <h2 class="media-heading"> City </h2>   
-                        <p> <input type = "text" v-model= "editData.city" placeholder="Enter your city"> </p>
+                        <p> <input type = "text" v-model= "editData.city" :placeholder="editedUser.location.city"> </p>
                         <h3 class="media-heading"> Country </h3>
-                        <p> <input type = "text" v-model = "editData.country" placeholder="Enter your country"> </p>
+                        <p> <input type = "text" v-model = "editData.country" :placeholder="editedUser.location.country"> </p>
                         <h4 class="media-heading"> Address </h4>
-                        <p> <input type = "text" v-model = "editData.address" placeholder="Enter your address"> </p>
+                        <p> <input type = "text" v-model = "editData.address" :placeholder="editedUser.location.address"> </p>
                         <p> <button class="btn done" v-on:click="doneEdit">Done</button></p>
                     </div> 
                     <div class="media-right col">
@@ -99,7 +99,14 @@ export default {
 </script>
 
 <style scoped>
-
+    .data{
+        width:100%;
+    }
+    input{
+        width:100%;
+        padding:3px;
+        border:2px solid rgba(160,180,245,0.3);
+    }
     .edit, .done{
         border:2px solid rgba(160,180,245,0.7);
     }
