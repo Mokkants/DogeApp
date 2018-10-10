@@ -39,40 +39,32 @@
         <div class="col-sm-4"></div>
     </div>
 
-    <!-- Have not yet managed to display name instead of ID of postedBy -->
-    <div class="row" v-for="post in posts" v-bind:key="post._id" >
+    <div class="row">
         <div class="col-sm-2"></div>
-        <div  class="col-sm-8 media border p-3 mt-3 mb-3" v-if="(userType=='WALKER' && (post.walker == null || post.walker == userId)) || userId==post.postedBy._id" >
-                <div class="col-sm-1"><button type="button" title="Delete post" exact v-if="userType=='OWNER'" id="delete-post" @click="deletePost(post._id)">&times;</button></div>
-                <div class="col-sm-2 postStyle"><p class="postStyle">Created by:</p> {{post.postedBy.name}}</div>
-                <div class="col-sm-6 postStyle"><p class="postStyle">Description:</p>  {{post.text}} </div>
-                <div class="col-sm-3 postStyle">Time to be picked up: <p class="postStyle"><p id="pickup"> {{post.time.walkOrder | formatDate}}</p>
-                <button type="button" title="Delete post" id="claim-post" exact v-if="userType=='WALKER'" @click="claimPost(post._id)">Claim</button>
-                 <button type="button" title="cancel-claim" id="cancel-claim" exact v-if="post.walker && post.walker ==userId" @click="cancelClaimToPost(post._id)" >cancel claim</button>
-                </div>
-                
+        <div class="col-sm-8 col-xs-12">
+             <post v-for="post in posts" :key="post._id" :post="post" v-on:delete="deletePost(post._id)" v-on:claim="claimPost(post._id)" v-on:cancel="cancelClaimToPost(post._id)"></post>            
         </div>
-        <div class="col-sm-2"></div>
     </div>
+    <!-- Have not yet managed to display name instead of ID of postedBy -->
 
 </div>
 
 </template>
 
 
-<script>
- 
+<script> 
 const axios = require('axios');
+import Post from './Post.vue';
 module.exports = {
     name:"Timeline",
+    components:{
+        'post':Post
+    },
     data(){
         return {
             showById:null,
             posts: [], 
-             Post: {postedBy:'', text:'', walker:'', created:'', lastModified:'', walkOrder:'' }
-            
-
-            
+             Post: {postedBy:'', text:'', walker:'', created:'', lastModified:'', walkOrder:'' }    
         }
     },
   methods: {
