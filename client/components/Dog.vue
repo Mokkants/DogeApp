@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="buttons">
-                <a class="edit" v-on:click="onEdit">Edit</a>
+                <a class="edit" v-on:click="edit">Edit</a>
                 <a class="danger" v-on:click="remove">Remove</a>
             </div>
         </div>
@@ -43,11 +43,11 @@ export default {
         }
     },
     methods: {
+        edit:function(){
+            this.$emit('edit');
+        },
         remove: function(){
             this.$emit('remove');
-        },
-        onEdit:function(){
-            this.$emit('onEdit');
         }
     }
 }   
