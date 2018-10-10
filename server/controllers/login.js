@@ -23,9 +23,8 @@ function authenticate(req,res,next){
         } else{
             access.currentUser.id = user.id;
             access.currentUser.role = access.roles[user.role];            
-            res.status(200).json({"message":"Login successful!"});
+            res.status(200).json({user});
         }
     });
 
 }
-  

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d29009cb-9698-4472-a466-a63b6160731b",
+		"_postman_id": "ea708697-da57-4049-8696-9d15f81515ca",
 		"name": "TestCases",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -49,14 +49,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\" : \"bence150\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+							"raw": "{\n\t\"username\" : \"sven150\",\n\t\"name\" : \"Sven\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\",\n\t\t\"address\" : \"Forskningsgången 6\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
 							"raw": "localhost:3000/api/users",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users"
 							]
 						}
@@ -89,14 +91,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\" : \"bence150\",\n\t\"name\" : \"Bence\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
+							"raw": "{\n\t\"username\" : \"sven150\",\n\t\"name\" : \"Sven\",\n\t\"location\" : {\n\t\t\"city\" : \"Gothenburg\",\n\t\t\"country\" : \"Sweden\",\n\t\t\"address\" : \"Forskningsgången 6\"\n\t},\n\t\"isWalker\" : \"false\"\n}"
 						},
 						"url": {
 							"raw": "localhost:3000/api/users",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users"
 							]
 						}
@@ -134,9 +138,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								""
 							]
@@ -175,9 +181,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/99999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"99999"
 							]
@@ -216,9 +224,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								""
 							]
@@ -252,14 +262,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\":\"bence\"\n}"
+							"raw": "{\n\t\"username\":\"sven\"\n}"
 						},
 						"url": {
 							"raw": "localhost:3000/api/login/authenticate",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"login",
 								"authenticate"
 							]
@@ -293,14 +305,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\":\"bence150\"\n}"
+							"raw": "{\n\t\"username\":\"sven150\"\n}"
 						},
 						"url": {
 							"raw": "localhost:3000/api/login/authenticate",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"login",
 								"authenticate"
 							]
@@ -342,9 +356,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								""
 							]
@@ -383,9 +399,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"{{post_id}}"
 							]
@@ -424,9 +442,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"999999"
 							]
@@ -465,9 +485,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/9999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"9999999"
 							]
@@ -506,9 +528,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"{{post_id}}"
 							]
@@ -547,9 +571,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"999999"
 							]
@@ -588,9 +614,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"{{post_id}}"
 							]
@@ -629,9 +657,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts"
 							]
 						}
@@ -669,9 +699,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/99999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"99999"
 							]
@@ -710,9 +742,11 @@
 						"url": {
 							"raw": "localhost:3000/api/posts/{{post_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"posts",
 								"{{post_id}}"
 							]
@@ -754,9 +788,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								""
 							]
@@ -783,13 +819,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"{{dog_id}}"
 							]
@@ -816,13 +857,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "localhost:3000/api/dogs/9999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"9999999"
 							]
@@ -849,13 +895,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "localhost:3000/api/dogs",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs"
 							]
 						}
@@ -893,9 +944,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/99999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"99999"
 							]
@@ -934,9 +987,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"{{dog_id}}"
 							]
@@ -975,9 +1030,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"{{dog_id}}"
 							]
@@ -1016,9 +1073,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/99999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"99999"
 							]
@@ -1057,9 +1116,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"999999"
 							]
@@ -1098,9 +1159,11 @@
 						"url": {
 							"raw": "localhost:3000/api/dogs/{{dog_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"dogs",
 								"{{dog_id}}"
 							]
@@ -1139,9 +1202,11 @@
 						"url": {
 							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"{{user_id}}"
 							]
@@ -1180,9 +1245,11 @@
 						"url": {
 							"raw": "localhost:3000/api/users/9999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"9999999"
 							]
@@ -1221,9 +1288,11 @@
 						"url": {
 							"raw": "localhost:3000/api/users",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users"
 							]
 						}
@@ -1256,14 +1325,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"address\" : \"Auguststraße 7\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"{{user_id}}"
 							]
@@ -1297,14 +1368,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"coordinates\":{\n\t\t\t\"longitude\":\"69\",\n\t\t\t\"latitude\":\"69\"\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"name\" : \"Herp\",\n\t\"location\": {\n\t\t\"country\" : \"Turkey\",\n\t\t\"city\" : \"New York\",\n\t\t\"address\" : \"Auguststraße 7\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "localhost:3000/api/users/99999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"99999999"
 							]
@@ -1343,9 +1416,11 @@
 						"url": {
 							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"{{user_id}}"
 							]
@@ -1384,9 +1459,11 @@
 						"url": {
 							"raw": "localhost:3000/api/users/99999999",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"99999999"
 							]
@@ -1425,9 +1502,11 @@
 						"url": {
 							"raw": "localhost:3000/api/users/45",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"45"
 							]
@@ -1466,9 +1545,11 @@
 						"url": {
 							"raw": "localhost:3000/api/users/{{user_id}}",
 							"host": [
-								"localhost:3000/api"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
+								"api",
 								"users",
 								"{{user_id}}"
 							]
