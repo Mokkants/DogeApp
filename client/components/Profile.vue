@@ -2,33 +2,36 @@
     <div class="row">
         <div class="col"></div>
             <div class="card m-3 col-sm-10">
-                <div class="media p-3 mt-3 mb-3">
-                    <div class="media-left col">
+                <div class="media p-3 mt-3 mb-3 profile">
+                    <div class="profile_pic">
                         <img src="https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png" class="media-object" style="width:150px">
                     </div>
-                    <div class="media-body col-sm-4 data" v-show="onEdit">
-                        <h1 class="media-heading"> Name </h1>
-                        <p> {{user.name}} </p>
-                        <h2 class="media-heading"> City </h2>
-                        <p> {{user.location.city}} </p>
-                        <h3 class="media-heading"> Country </h3>
-                        <p> {{user.location.country}} </p>
-                        <h3 class="media-heading"> Address </h3>
-                        <p> {{user.location.address}} </p>
-                    </div>
-                    <div class="media-body col-sm-4 data" v-show="!onEdit">
-                        <h1 class="media-heading"> Name </h1>
-                        <p> <input type = "text" v-model = "editData.name" :placeholder="editedUser.name"> </p>
-                        <h2 class="media-heading"> City </h2>   
-                        <p> <input type = "text" v-model= "editData.city" :placeholder="editedUser.location.city"> </p>
-                        <h3 class="media-heading"> Country </h3>
-                        <p> <input type = "text" v-model = "editData.country" :placeholder="editedUser.location.country"> </p>
-                        <h4 class="media-heading"> Address </h4>
-                        <p> <input type = "text" v-model = "editData.address" :placeholder="editedUser.location.address"> </p>
-                        <p> <button class="btn done" v-on:click="doneEdit">Done</button></p>
-                    </div> 
-                    <div class="media-right col">
-                        <button type="button" class="btn edit" v-on:click="onEdit = !onEdit"> Edit </button>
+                    <div class="gap"></div>
+                    <div class="wrapper">
+                        <div class="data" v-show="onEdit">
+                            <h1 class="media-heading"> Name </h1>
+                            <p> {{user.name}} </p>
+                            <h2 class="media-heading"> City </h2>
+                            <p> {{user.location.city}} </p>
+                            <h3 class="media-heading"> Country </h3>
+                            <p> {{user.location.country}} </p>
+                            <h3 class="media-heading"> Address </h3>
+                            <p> {{user.location.address}} </p>
+                        </div>
+                        <div class="data" v-show="!onEdit">
+                            <h1 class="media-heading"> Name </h1>
+                            <p> <input type = "text" v-model = "editData.name" :placeholder="editedUser.name"> </p>
+                            <h2 class="media-heading"> City </h2>   
+                            <p> <input type = "text" v-model= "editData.city" :placeholder="editedUser.location.city"> </p>
+                            <h3 class="media-heading"> Country </h3>
+                            <p> <input type = "text" v-model = "editData.country" :placeholder="editedUser.location.country"> </p>
+                            <h4 class="media-heading"> Address </h4>
+                            <p> <input type = "text" v-model = "editData.address" :placeholder="editedUser.location.address"> </p>
+                            <p> <button class="btn done" v-on:click="doneEdit">Done</button></p>
+                        </div> 
+                        <div class="buttons">
+                            <button type="button" class="btn edit" v-on:click="onEdit = !onEdit"> Edit </button>
+                        </div>
                     </div>
                 </div> 
             </div>
@@ -99,11 +102,23 @@ export default {
 </script>
 
 <style scoped>
-    .data{
+    .profile{
+        display:flex;
+    }
+    .wrapper{
+        display: flex;
+        flex:3;
         width:100%;
+    }
+    .data{
+        flex:3;
+    }
+    .gap{
+        flex:1;
     }
     input{
         width:100%;
+        max-width:400px;
         padding:3px;
         border:2px solid rgba(160,180,245,0.3);
     }
@@ -112,6 +127,17 @@ export default {
     }
 
     @media screen and (max-width: 500px) {
-    
+        .profile{
+            flex-direction: column;
+            align-items: center;
+        }
+        .wrapper{
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        .buttons{
+            display: flex;
+            justify-content: center;
+        }
     }
 </style>
