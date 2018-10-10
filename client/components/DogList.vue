@@ -8,11 +8,13 @@
 
     <div class="row">
     <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <button class="success-btn" onclick="document.getElementById('dog-create-modal').style.display='block'" style="width:auto;" exact>Add a dog</button>
         <dog v-for="dog in dogs" :key="dog._id" :dog="dog" v-on:removed="onRemove" v-on:edited="onEdit"></dog>        
+    </div>
     <div class="col-sm-2"></div>
     </div>
 
-    <button class="success-btn" onclick="document.getElementById('dog-create-modal').style.display='block'" style="width:auto;" exact>Add a dog</button>
     <div id="dog-create-modal" class="modal">
         <form class="modal-content animate" action="#/dogs">
              <div class="imgcontainer">
@@ -32,29 +34,32 @@
              </div>
         </form>
     </div>
-
-    <div id="dog-edit-modal" class="modal">
-        <form class="modal-content animate" action="#/dogs">
-             <div class="imgcontainer">
-               <span onclick="document.getElementById('dog-edit-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
-               <img src="resources/images/logo.png" width="150" alt="Avatar" class="avatar">
-             </div>
-             <div class="container">
-                <h1 class="media-heading"> Name </h1>
-                <p> <input type = "text" v-model = "dogData.name" placeholder="Enter dog's name"> </p>
-                <h2 class="media-heading"> Breed </h2>   
-                <p> <input type = "text" v-model = "dogData.breed" placeholder="Enter dog's breed"> </p>
-                <h3 class="media-heading"> Social? </h3>
-                    <input type = "checkbox" v-model = "dogData.isSocial">
-                <h4 class="media-heading"> Description </h4>   
-                <p> <input type = "text" v-model= "dogData.shortInfo" placeholder="Enter dog's info"> </p>
-                <p> <button class="btn" v-on:click="doneEdit">Done</button></p>   
-             </div>
-        </form>
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3" >
+        <div id="dog-edit-modal" class="modal">
+            <form class="modal-content animate" action="#/dogs">
+                <div class="imgcontainer">
+                <span onclick="document.getElementById('dog-edit-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="resources/images/logo.png" width="150" alt="Avatar" class="avatar">
+                </div>
+                <div class="container">
+                    <h1 class="media-heading"> Name </h1>
+                    <p> <input type = "text" v-model = "dogData.name" placeholder="Enter dog's name"> </p>
+                    <h2 class="media-heading"> Breed </h2>   
+                    <p> <input type = "text" v-model = "dogData.breed" placeholder="Enter dog's breed"> </p>
+                    <h3 class="media-heading"> Social? </h3>
+                        <input type = "checkbox" v-model = "dogData.isSocial">
+                    <h4 class="media-heading"> Description </h4>   
+                    <p> <input type = "text" v-model= "dogData.shortInfo" placeholder="Enter dog's info"> </p>
+                    <p> <button class="btn" v-on:click="doneEdit">Done</button></p>   
+                </div>
+            </form>
+        </div>
     </div>
+    <div class="col-sm-6"></div>
 </div>
-
-
+</div>
 </template>
 <script>
 import Dog from './Dog.vue';

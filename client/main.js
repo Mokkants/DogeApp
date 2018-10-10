@@ -14,7 +14,6 @@ let router = new VueRouter({
     { path: '/profile', component: require("./components/Profile.vue")},
     { path: '/schedule', component: require("./components/Schedule.vue")},
     { path: '/dogs', component: require("./components/DogList.vue")},
-
     ]
 });
 
