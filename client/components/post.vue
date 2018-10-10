@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="media-boxs" v-for="post in posts" :key="post.time.created">
-            <h5>{{ post.postedBy }}<small><i>&nbsp;Posted: {{ post.time.created }}</i></small></h5>
+            <h5>{{ post.postedBy }}<small><i>&nbsp;Posted: {{ post.time.created | formatDate }}</i></small></h5>
             <div class="media">
                 <div class="media-left">
                 <img src="resources/images/user.png" alt="Image" class="mr-3" style="width:120px">
@@ -20,10 +20,10 @@
                                 <td>Post Status:</td>
                             </tr>
                             <tr>
-                                <td>{{ post.time.walkOrder }}</td>
+                                <td>{{ post.time.walkOrder | formatDate }}</td>
                                 <td>
                                     <p v-if="availability === 'notClaimed'">Available</p>
-                                    <p v-else>Claimed by {{this.data}} </p>
+                                    <p v-else>Claimed by {{this._id}} </p>
                                 </td>
                             </tr>
                         </table>
@@ -38,7 +38,7 @@
                     </button>
                     </div>
                     <div v-if="availability === 'claimed'">
-                    <button  v-on:click="cancel">
+                    <button  v-on:click="cancel" v-bind="this._id">
                         Cancel Claim
                     </button>
                     </div>    
@@ -79,7 +79,7 @@ module.exports = {
         claim: function(){
                 if(this.availability=='notClaimed'){
                     axios.patch('/api/users'+this._id,{
-                        data: this.data
+                        data: this._id
                     })
                     .then(response => {
                         if(response.status==201){
@@ -92,6 +92,13 @@ module.exports = {
         },
         cancel: function(){
                 if(this.availability=='claimed'){
+                    axios.patch('/api/users'+this._id,{
+                        data: null
+                    })
+                    .then(response => {
+                        if(response.status==201){
+                        alert('Succesfully Canceled the Claim')}
+                    })
                     this.availability='notClaimed'
                 }else{                    
                         this.availability='claimed'                
