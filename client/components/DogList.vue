@@ -8,18 +8,20 @@
 
     <div class="row">
     <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <button class="add-dog-btn" onclick="document.getElementById('dog-create-modal').style.display='block'" style="width:auto;" exact>Add dog</button>
         <dog v-for="dog in dogs" :key="dog._id" :dog="dog" v-on:removed="onRemove" v-on:edited="onEdit"></dog>        
+    </div>
     <div class="col-sm-2"></div>
     </div>
-
-    <button class="success-btn" onclick="document.getElementById('dog-create-modal').style.display='block'" style="width:auto;" exact>Add a dog</button>
+    
     <div id="dog-create-modal" class="modal">
         <form class="modal-content animate" action="#/dogs">
              <div class="imgcontainer">
                <span onclick="document.getElementById('dog-create-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
                <img src="resources/images/logo.png" width="150" alt="Avatar" class="avatar">
              </div>
-             <div class="container">
+             <div class="container" id="createDog">
                 <h1 class="media-heading"> Name </h1>
                 <p> <input type = "text" v-model = "dogData.name" placeholder="Enter dog's name"> </p>
                 <h2 class="media-heading"> Breed </h2>   
@@ -32,29 +34,32 @@
              </div>
         </form>
     </div>
-
-    <div id="dog-edit-modal" class="modal">
-        <form class="modal-content animate" action="#/dogs">
-             <div class="imgcontainer">
-               <span onclick="document.getElementById('dog-edit-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
-               <img src="resources/images/logo.png" width="150" alt="Avatar" class="avatar">
-             </div>
-             <div class="container">
-                <h1 class="media-heading"> Name </h1>
-                <p> <input type = "text" v-model = "dogData.name" placeholder="Enter dog's name"> </p>
-                <h2 class="media-heading"> Breed </h2>   
-                <p> <input type = "text" v-model = "dogData.breed" placeholder="Enter dog's breed"> </p>
-                <h3 class="media-heading"> Social? </h3>
-                    <input type = "checkbox" v-model = "dogData.isSocial">
-                <h4 class="media-heading"> Description </h4>   
-                <p> <input type = "text" v-model= "dogData.shortInfo" placeholder="Enter dog's info"> </p>
-                <p> <button class="btn" v-on:click="doneEdit">Done</button></p>   
-             </div>
-        </form>
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3" >
+        <div id="dog-edit-modal" class="modal">
+            <form class="modal-content animate" action="#/dogs">
+                <div class="imgcontainer">
+                <span onclick="document.getElementById('dog-edit-modal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="resources/images/logo.png" width="150" alt="Avatar" class="avatar">
+                </div>
+                <div class="container" id="createDog">
+                    <h1 class="media-heading"> Name </h1>
+                    <p> <input type = "text" v-model = "dogData.name" placeholder="Enter dog's name"> </p>
+                    <h2 class="media-heading"> Breed </h2>   
+                    <p> <input type = "text" v-model = "dogData.breed" placeholder="Enter dog's breed"> </p>
+                    <h3 class="media-heading"> Social? </h3>
+                        <input type = "checkbox" v-model = "dogData.isSocial">
+                    <h4 class="media-heading"> Description </h4>   
+                    <p> <input type = "text" v-model= "dogData.shortInfo" placeholder="Enter dog's info"> </p>
+                    <p> <button class="btn" v-on:click="doneEdit">Done</button></p>   
+                </div>
+            </form>
+        </div>
     </div>
+    <div class="col-sm-6"></div>
 </div>
-
-
+</div>
 </template>
 <script>
 import Dog from './Dog.vue';
@@ -193,3 +198,53 @@ var createModal = document.getElementById('dog-create-modal');
     }
 }
 </script>
+<style>
+.add-dog-btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+    align-content: center;
+    
+    
+}
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+#createDog{
+    margin-left:500px;
+    
+}
+.avatar{
+    margin-left:500px;
+}
+    </style>

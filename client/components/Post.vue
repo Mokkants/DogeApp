@@ -50,7 +50,7 @@ export default {
         },
         claimPost: function(){
             this.$emit('claim');
-            this.post.walker = userId;
+            this.post.walker = this.userId;
         },
         cancelClaim:function(){
             this.$emit('cancel');
@@ -133,8 +133,8 @@ export default {
         background-color: #fff !important;
         color:rgb(161, 49, 49) !important;
         font-size: 30px;
-        padding:10;
         line-height:0px;
+        padding:10px;
         display: flex;
         align-items: center;
         justify-content: center;       
@@ -152,6 +152,10 @@ export default {
         .primary, .details, .post{
             flex-direction: column;
         }   
+
+        .post-btn-transparent{
+           margin-bottom:15px;
+        }
     }
 
     @media screen and (max-width: 575px){

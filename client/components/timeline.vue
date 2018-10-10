@@ -127,23 +127,27 @@ module.exports = {
             });
         },
         
-           //Performs a GET request to /api/camels using AXIOS.
         getPosts: function () {
             axios.get('/api/posts/')
             .then(
                 response => {
-                    //This is only an example of how you can access the status code
                     if (response.status!==200) {
                         console.log("Wrong status code: " + response.status);
                     }
-                    //If we get a response, empty the camels array and fill it with all camels from our endpoints
                     this.posts.length = 0;
                     for (var i = 0; i < response.data.data.length; i++) {
-                        this.posts.push(response.data.data[i]);
+                        let current = response.data.data[i];
+                        if(this.userType === 'OWNER' ){
+                            if(current.postedBy._id === this.userId){
+                                this.posts.push(current);
+                            }
+                        }
+                        else if(this.userType==='WALKER'){
+                            this.posts.push(current);
+                        }
                     }
             })
             .catch(error => {
-                //In case of error, empty the camels array.
                 this.posts.length = 0;
                 console.log(error);
             })
