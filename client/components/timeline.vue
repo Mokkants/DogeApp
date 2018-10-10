@@ -3,7 +3,7 @@
     <div class="row" id="top-buffer">
     <div class="col-sm-3"></div>
     <div class="col-sm-3" >
-        <button onclick="document.getElementById('post-modal').style.display='block'" style="width:auto;" exact v-if="userType=='OWNER'" >Create new post</button>
+        <button class="success-btn" onclick="document.getElementById('post-modal').style.display='block'" style="width:auto;" exact v-if="userType=='OWNER'" >Create new post</button>
         
         <div id="post-modal" class="modal">
             <form class="modal-content animate" action="#/timeline">
@@ -13,17 +13,17 @@
                 </div>
 
                  <div class="container">
-                    <label for="information" id="post-text-head" ><b>Create new post</b></label>
+                    <label for="information" id="post-text-head" align="center"><b>Create new post</b></label>
                      <p> 
                     <textarea id="info-text"  rows="5" placeholder="Add information..." v-model="Post.text"></textarea>
                     </p>
                     <input id="walkTime" type="datetime-local" name="walk-time" v-model="Post.walkOrder">
-                    <button type="button" id="sub-button" v-on:click="createPost">Submit post</button>
+                    <button type="button" class="success-btn" id="sub-button" v-on:click="createPost">Submit post</button>
                     
                  </div>
 
                 <div class="container" style="background-color:#f1f1f1">
-                     <button type="button" onclick="document.getElementById('post-modal').style.display='none'" class="cancelbtn">Cancel</button>
+                     <button type="button" id="cancelPost" onclick="document.getElementById('post-modal').style.display='none'" class="cancelbtn">Cancel</button>
       
                 </div>
              </form>
@@ -42,10 +42,15 @@
     <!-- Have not yet managed to display name instead of ID of postedBy -->
     <div class="row" v-for="post in posts" v-bind:key="post._id" >
         <div class="col-sm-2"></div>
-        <div  class="col-sm-8 media border p-3 mt-3 mb-3" v-if="userType=='WALKER' || userId==post.postedBy._id">
-                <div class="col-sm-3 postStyle"><p class="postStyle">Created by:</p> {{post.postedBy.name}}</div>
+        <div  class="col-sm-8 media border p-3 mt-3 mb-3" v-if="(userType=='WALKER' && (post.walker == null || post.walker == userId)) || userId==post.postedBy._id" >
+                <div class="col-sm-1"><button type="button" title="Delete post" exact v-if="userType=='OWNER'" id="delete-post" @click="deletePost(post._id)">&times;</button></div>
+                <div class="col-sm-2 postStyle"><p class="postStyle">Created by:</p> {{post.postedBy.name}}</div>
                 <div class="col-sm-6 postStyle"><p class="postStyle">Description:</p>  {{post.text}} </div>
-                <div class="col-sm3 postStyle">Post <p class="postStyle">created:</p> {{post.time.created | formatDate}}</div>
+                <div class="col-sm-3 postStyle">Time to be picked up: <p class="postStyle"><p id="pickup"> {{post.time.walkOrder | formatDate}}</p>
+                <button type="button" title="Delete post" id="claim-post" exact v-if="userType=='WALKER'" @click="claimPost(post._id)">Claim</button>
+                 <button type="button" title="cancel-claim" id="cancel-claim" exact v-if="post.walker && post.walker ==userId" @click="cancelClaimToPost(post._id)" >cancel claim</button>
+                </div>
+                
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -54,11 +59,10 @@
 
 </template>
 
+
 <script>
  
-
 const axios = require('axios');
-
 module.exports = {
     name:"Timeline",
     data(){
@@ -67,23 +71,54 @@ module.exports = {
             posts: [], 
              Post: {postedBy:'', text:'', walker:'', created:'', lastModified:'', walkOrder:'' }
             
+
+            
         }
     },
   methods: {
-
      
         // Couldn't figure out how to do this the proper way, just tried to test the POST for post. 
         //When creating a new post, the postedBy gets the right ID of the logged in user.
         // If i add v-model to the textarea above, the view just becomes empty.
+      
+      claimPost: function(id){
+           axios({
+                method: 'patch',
+                url: '/api/posts/'+id,
+                data: {
+                    walker: this.userId
+                }
+            }).then( response=> {
+            if(response.status==200){
+                alert('You claimed this walk');
+             }    
+            }).then(response =>{
+                 this.getPosts();
+            });
+           
+        },
+         cancelClaimToPost: function(id){
+            axios({
+                method: 'patch',
+                url: '/api/posts/'+id,
+                data: {
+                    walker: null
+                }
+                
+            }).then(response =>{
+                 this.getPosts();
+            });
+           
+        },
+      
       createPost: function(){
-          console.log(this.Post.walkOrder)
            let newPost = {
                text : this.Post.text,
                walker : null,
                time:{ 
                created : Date.now(),
                lastModified : null,
-               walkOrder : Date.now(),
+               walkOrder : this.Post.walkOrder
                }
            };
             axios({
@@ -100,8 +135,6 @@ module.exports = {
             });
         },
         
-
-
            //Performs a GET request to /api/camels using AXIOS.
         getPosts: function () {
             axios.get('/api/posts/')
@@ -125,9 +158,8 @@ module.exports = {
             .then(data => {
             
             })
-
-          }       
-           }, 
+          },      
+           
            deletePost: function (postID) {
             axios.delete('/api/posts/'+postID)
             .then(
@@ -149,11 +181,9 @@ module.exports = {
             })
             .then(function () {
             });
-
+           }
     }, 
-
            
-
     mounted () {
         this.getPosts();
        
@@ -165,11 +195,12 @@ module.exports = {
         },
         userId(){
            return this.$store.state.userInstance._id
+        },
+        user(){
+           return this.$store.state.userInstance
         }
     }
 }
-
-
 var modal = document.getElementById('post-modal');
  
  //this doesnt work at the moment
@@ -177,14 +208,41 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-
 }
-
-
 </script>
 
 
 <style scoped>
+#delete-post{
+    background-color: transparent;
+    color:black;
+    border: none;
+
+}
+#delete-post:hover{
+    color:red;
+    font-size: 140%
+}
+
+#claim-post{
+    background-color: transparent;
+    color:green;
+    border: none;
+
+}
+#claim-post:hover{
+    
+    font-size: 140%
+}
+
+#pickup{
+    color:dodgerblue;
+}
+#cancelPost{
+      width: 14%;
+margin-left: 43%;
+margin-right: 43%
+}
 #walkTime{
     margin-left: auto;
     margin-right: auto;
@@ -197,7 +255,6 @@ margin-top: 70px
     font-size: 10px;
 }
 body {font-family: Arial, Helvetica, sans-serif;}
-
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
@@ -207,10 +264,18 @@ input[type=text], input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
 /* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
+#post-text-head{
+    margin-left:220px;
+}
+
+#sub-button{
+  width: 30%;
+margin-left: 35%;
+margin-right: 35%
+    }
+.success-btn{
+   background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -218,57 +283,39 @@ button {
     cursor: pointer;
     width: 100%;
 }
-#sub-button{
-  width: 30%;
-margin-left: 35%;
-margin-right: 35%
-    }
-
-#post-text-head{
-    margin-left:220px;
-}
-
-
 #info-text{
       width: 60%;
 margin-left: 20%;
 margin-right: 20%;
 resize: none;
 }
-
 button:hover {
     opacity: 0.8;
 }
-
 /* Extra styles for the cancel button */
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
 }
-
 /* Center the image and position the close button */
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
 }
-
 img.avatar {
     width: 10%;
     border-radius: 50%;
 }
-
 .container {
     padding: 16px;
     grid-row-start: 300px;
 }
-
 span.psw {
     float: right;
     padding-top: 16px;
 }
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -283,7 +330,6 @@ span.psw {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
 }
-
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
@@ -291,7 +337,6 @@ span.psw {
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
 }
-
 /* The Close Button (x) */
 .close {
     position: absolute;
@@ -301,19 +346,16 @@ span.psw {
     font-size: 35px;
     font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
     color: red;
     cursor: pointer;
 }
-
 /* Add Zoom Animation */
 .animate {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s
 }
-
 @-webkit-keyframes animatezoom {
     from {-webkit-transform: scale(0)} 
     to {-webkit-transform: scale(1)}
@@ -323,7 +365,6 @@ span.psw {
     from {transform: scale(0)} 
     to {transform: scale(1)}
 }
-
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
     span.psw {
@@ -334,7 +375,4 @@ span.psw {
        width: 100%;
     }
 }
-
-
 </style>
-
