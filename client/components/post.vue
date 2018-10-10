@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="media-boxs" v-for="post in posts" v-bind:key="post._id">
-            <h5 class="media-heading">{{ post.postedBy }}<small><i>&nbsp;Posted: {{ post.time.created | formatDate }}</i></small></h5>
+        <div class="mdia-boxs" v-for="post in posts" :key="post.time.created">
+            <h5>{{ post.postedBy }}<small><i>&nbsp;Posted: {{ post.time.created }}</i></small></h5>
             <div class="media">
                 <div class="media-left">
-                <img src="resources/images/user.png" alt="User" class="mr-3" style="width:120px">
+                <img src="resources/images/user.png" alt="Image" class="mr-3" style="width:120px">
                 </div>
                 <div class="media-body mr-3">
                     <div class="tm-description-box">
@@ -22,8 +22,8 @@
                             <tr>
                                 <td>{{ post.time.walkOrder }}</td>
                                 <td>
-                                    <p v-if="!isClaimed">Available</p>
-                                    <p v-else>Claimed by {{ claimedBy }}</p>
+                                    <p v-if="availability === 'notClaimed'">Available</p>
+                                    <p v-else>Claimed by {{this.data}} </p>
                                 </td>
                             </tr>
                         </table>
@@ -31,19 +31,17 @@
                     <div class="col-sm-3"></div>
                 </div>
                 </div>
-                <div v-show="isWalker" v-bind="walker">
-                    <button v-on:click="claimToPost(post._id)"
-                        :disabled="isClaimed"
-                        :class="{ disabledButton: isClaimed}"
-                        v-bind:key="post._id"
-                        >
+                <div v-if="loginType === 'WALKER'">
+                    <div v-if="availability === 'notClaimed'">
+                    <button  v-on:click="claim">
                         Claim
                     </button>
-                    <button v-show="isClaimed" @click="cancelClaimToPost(post._id)"
-                        v-bind:class="post._id"
-                        >
-                        Cancel
-                    </button>    
+                    </div>
+                    <div v-if="availability === 'claimed'">
+                    <button  v-on:click="cancel">
+                        Cancel Claim
+                    </button>
+                    </div>    
                 </div>
             </div>
         </div>
@@ -55,22 +53,12 @@ var axios = require('axios')
 
 module.exports = {
     name:"Post",
-    props:{
-        isWalker:{
-            type: Boolean,
-            required: true
-        },
-        isClaimed:{
-            type: Boolean,
-            required: false 
-        }
-    },
     data(){
         return{
             showById:null,
             posts:[],
-            post: {postedBy:'', text:'', walker:'', created:'', lastModified:'', walkOrder:'' },
-            User: {isWalker:''}
+           
+            User: {}
         }
     },
     methods: {
@@ -88,40 +76,34 @@ module.exports = {
                 console.log(error);
             })  
         },
-        claimToPost: function(id){
-            axios({
-                method: 'patch',
-                url: '/api/posts/'+id,
-                data:{
-                    claimedBy: this.post.walker,
-                }
-            })
-            .then( response => {
-               if(response.status==201){
-                alert('successfully claimed');
-                this.isClaimed()
-               }    
-            });
+        claim: function(){
+                if(this.availability=='notClaimed'){
+                    axios.patch('/api/users'+this._id,{
+                        data: this.data
+                    })
+                    .then(response => {
+                        if(response.status==201){
+                        alert('Succesfully Claimed to the Post')}
+                    })
+                    this.availability='claimed'   
+                }else{                    
+                        this.availability='notClaimed'                
+                        }
         },
-        cancelClaimToPost: function(id){
-            axios({
-                method: 'patch',
-                url: '/api/posts/'+id,
-                data: {
-                    walker: null,
-                }
-            })
-            .then( response => {
-               if(response.status==201){
-                alert('claim cancelled');
-                this.isClaimed(flase) 
-               }    
-            });
+        cancel: function(){
+                if(this.availability=='claimed'){
+                    this.availability='notClaimed'
+                }else{                    
+                        this.availability='claimed'                
+                        }
         }
     },
     computed:{
-        isClaimed(){
-            return true
+        loginType(){
+            return this.$store.state.userInstance.role;
+        },
+        userId(){
+           return this.$store.state.userInstance._id
         }
     }
 }
