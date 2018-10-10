@@ -44,10 +44,10 @@ export default {
     },
     methods: {
         edit:function(){
-            this.$emit('edit');
+            this.$emit('edited', this.dog);
         },
         remove: function(){
-            this.$emit('remove');
+            this.$emit('removed', this.dog._id);
         }
     }
 }   

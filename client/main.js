@@ -13,6 +13,8 @@ let router = new VueRouter({
     { path: '/', component: require("./components/timeline.vue") },
     { path: '/profile', component: require("./components/Profile.vue")},
     { path: '/schedule', component: require("./components/Schedule.vue")},
+    { path: '/dogs', component: require("./components/DogList.vue")},
+
     ]
 });
 
