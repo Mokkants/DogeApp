@@ -38,10 +38,19 @@ function createDog(req, res, next) {
     }
 }
 function getAllDogs(req, res, next){
-    Dog.find(function(err, dog){
+    var queryParam = req.query.sort;
+    if (queryParam !== undefined){
+        Dog.find().sort(queryParam).exec(function(err, dog){
+            if(err){return next(err);}
+            res.json({"data": dog});
+        });
+    }
+    else {
+        Dog.find(function(err,dog){
         if(err){return next(err);}
-        res.status(200).json({"data": dog});
-    });
+        res.json({"data": dog});
+        });
+    }
 }
 
 function getDog(req, res, next) {
