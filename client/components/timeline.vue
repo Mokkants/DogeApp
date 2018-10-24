@@ -4,7 +4,7 @@
     <div class="col-sm-3"></div>
     <div class="col-sm-3" >
         <button class="success-btn" onclick="document.getElementById('post-modal').style.display='block'" style="width:auto;" exact v-if="userType=='OWNER'" >Create new post</button>
-        
+        <button class="delete-btn" id="deleteBtn" style="width:auto;" v-on:click="deletePosts(userId)" v-if="userType=='OWNER'">Delete all posts</button>
         <div id="post-modal" class="modal">
             <form class="modal-content animate" action="#/timeline">
                 <div class="imgcontainer">
@@ -69,10 +69,29 @@ module.exports = {
     },
   methods: {
      
-        // Couldn't figure out how to do this the proper way, just tried to test the POST for post. 
-        //When creating a new post, the postedBy gets the right ID of the logged in user.
-        // If i add v-model to the textarea above, the view just becomes empty.
-      
+  
+        deletePosts: function(UserId){
+        
+        for(var i=0; i<this.posts.length; i++){
+            console.log("test" + this.posts[i].postedBy._id + UserId);
+            if(this.posts[i].postedBy._id === UserId){
+           var postID = this.posts[i]._id;
+        axios.delete('/api/posts/'+postID)
+            .then(
+                response => {
+                    console.log("Success: " + response.status);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .then(function () {
+            });
+           }}
+           this.posts=[];
+        },
+    
+
+
       claimPost: function(id){
            axios({
                 method: 'patch',
@@ -185,6 +204,8 @@ module.exports = {
        
          
 },
+
+    
  computed:{
         userType(){
             return this.$store.state.userInstance.role;
@@ -263,6 +284,15 @@ input[type=text], input[type=password] {
 /* Set a style for all buttons */
 #post-text-head{
     margin-left:220px;
+}
+#deleteBtn{
+    background-color: red;
+    color:white;
+     box-sizing: border-box;
+      padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
 }
 
 #sub-button{
