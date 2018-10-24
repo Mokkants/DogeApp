@@ -58,10 +58,19 @@ function getPost(req, res, next) {
 }
 
 function getAllPosts(req, res, next){
-    Post.find().populate('postedBy').sort('+time.walkOrder').exec(function(err, posts){
-        if(err) {return next(err);}
-        res.json({"data": posts});
-    });
+    var queryParam = req.query.sort;
+    if (queryParam !== undefined){
+        Post.find().sort(queryParam).exec(function(err, post){
+            if(err){return next(err);}
+            res.json({"data": post});
+        });
+    }
+    else {
+        Post.find(function(err,post){
+        if(err){return next(err);}
+        res.json({"data": post});
+        });
+    }
 }
 
 function deletePost(req, res, next){
