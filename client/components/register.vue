@@ -49,8 +49,11 @@
             </div>
             <div class="row">
                 <div class="radio col-sm-12" align="center">
-                    <label><input type="radio" name="optradio" value="false" v-model="User.isWalker">Dog Owner</label>
+                        
+                        <form>
+                    <label><input type="radio" name="optradio" value="false" id="owner-radio" v-model="User.isWalker">Dog Owner</label>
                     <label><input type="radio" name="optradio" id="dog-radio" value="true" v-model="User.isWalker">Dog Walker</label>
+                        </form>
             </div>
             </div>
             <div class="row" id="reg-button">
@@ -70,7 +73,7 @@ module.exports = {
     data(){
         return {
             showById:null,
-            User: {username:'', name:'', walker:'', city:'', address:'', isWalker:'' }
+            User: {username:'', name:'', walker:'', city:'', address:'', isWalker:'false' }
         };
     },
     methods:{
@@ -94,9 +97,19 @@ module.exports = {
                if(response.status==201){
                 alert('Your registration was succesful. Welcome to DogeApp,' + this.User.name);
                 this.$emit("back")
-               }    
+               }  
+                  
+                
+            }).catch(error =>{
+                if(error.response){
+                    if(error.response.status === 4010){
+                        alert("Username already taken!");
+                    }
+                }
             });
-        },
+       },
+            
+
         back:function(){
             this.$emit("back");            
         }
@@ -110,6 +123,7 @@ img{
     margin-left: auto;
     margin-left: auto;
 }
+
 #dog-radio{
     margin-left: 30px;
 }
@@ -137,8 +151,6 @@ img{
             margin-left:auto;
 
         }
-        #dog-radio{
-            margin-left: 0;
-        }
+        
   }
 </style>
