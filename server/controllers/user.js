@@ -48,11 +48,19 @@ function createUser(req, res, next) {
 }
 
 function getAllUsers(req, res, next){
-    User.find(function(err, users){
-        if(err) {return next(err);}
-        if(!users){return res.status(404).json("No users found");}
-        res.status(200).json({"data": users});
-    });
+    var queryParam = req.query.sort;
+    if (queryParam !== undefined){
+        User.find().sort(queryParam).exec(function(err, user){
+            if(err){return next(err);}
+            res.json({"data": user});
+        });
+    }
+    else {
+        User.find(function(err,user){
+        if(err){return next(err);}
+        res.json({"data": user});
+        });
+    }
 }
 
 function getUser(req, res, next) {
