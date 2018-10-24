@@ -40,13 +40,13 @@ function createDog(req, res, next) {
 function getAllDogs(req, res, next){
     var queryParam = req.query.sort;
     if (queryParam !== undefined){
-        Dog.find().sort(queryParam).exec(function(err, dog){
+        Dog.find().populate('owner').sort(queryParam).exec(function(err, dog){
             if(err){return next(err);}
             res.json({"data": dog});
         });
     }
     else {
-        Dog.find(function(err,dog){
+        Dog.find().populate('owner').exec(function(err,dog){
         if(err){return next(err);}
         res.json({"data": dog});
         });

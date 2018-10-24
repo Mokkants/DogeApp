@@ -60,13 +60,13 @@ function getPost(req, res, next) {
 function getAllPosts(req, res, next){
     var queryParam = req.query.sort;
     if (queryParam !== undefined){
-        Post.find().sort(queryParam).exec(function(err, post){
+        Post.find().populate('postedBy').sort(queryParam).exec(function(err, post){
             if(err){return next(err);}
             res.json({"data": post});
         });
     }
     else {
-        Post.find(function(err,post){
+        Post.find().populate('postedBy').exec(function(err, post){
         if(err){return next(err);}
         res.json({"data": post});
         });
