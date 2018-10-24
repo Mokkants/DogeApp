@@ -16,9 +16,6 @@ router.post('/', createPost);
 router.put('/:id', updatePost);
 router.patch('/:id', patchPost);
 router.delete('/:id', deletePost);
-
-
-
 module.exports = router;
 
 function createPost(req, res, next) {
@@ -60,6 +57,12 @@ function getPost(req, res, next) {
     }
 }
 
+function getAllPosts(req, res, next){
+    Post.find().populate('postedBy').sort('+time.walkOrder').exec(function(err, posts){
+        if(err) {return next(err);}
+        res.json({"data": posts});
+    });
+}
 
 function deletePost(req, res, next){
     Post.findOne({_id: req.params.id}, function(err, post){

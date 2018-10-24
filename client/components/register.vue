@@ -98,12 +98,11 @@ module.exports = {
                 alert('Your registration was succesful. Welcome to DogeApp,' + this.User.name);
                 this.$emit("back")
                }  
-              
-                   
+                  
                 
             }).catch(error =>{
                 if(error.response){
-                    if(error.response.status === 401){
+                    if(error.response.status === 4010){
                         alert("Username already taken!");
                     }
                 }
@@ -116,7 +115,6 @@ module.exports = {
         }
     }
 }
-
 </script>
 
 <style scoped>

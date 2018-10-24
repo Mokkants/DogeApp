@@ -220,7 +220,7 @@ module.exports = {
 }
 var modal = document.getElementById('post-modal');
  
- //this doesnt work at the moment
+
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
